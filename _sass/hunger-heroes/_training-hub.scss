@@ -74,6 +74,50 @@
 	max-width: 46rem;
 }
 
+.training-hub-hero__actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: $token-space-3;
+	margin-top: $token-space-6;
+}
+
+.training-hub-button {
+	align-items: center;
+	border: 1px solid transparent;
+	border-radius: $token-radius-full;
+	display: inline-flex;
+	font-size: $token-text-sm;
+	font-weight: $token-weight-semibold;
+	gap: 0.4rem;
+	justify-content: center;
+	padding: 0.8rem 1.15rem;
+	text-decoration: none;
+	transition: transform $token-transition-fast, box-shadow $token-transition-fast, background-color $token-transition-fast, border-color $token-transition-fast;
+
+	&:hover,
+	&:focus-visible {
+		transform: translateY(-1px);
+	}
+}
+
+.training-hub-button--primary {
+	background: linear-gradient(135deg, $token-primary-500 0%, $token-secondary-500 100%);
+	box-shadow: $token-shadow-md;
+	color: $token-text-inverse;
+}
+
+.training-hub-button--secondary {
+	background: #{rgba($token-primary-500, 0.08)};
+	border-color: #{rgba($token-primary-500, 0.16)};
+	color: var(--training-accent);
+}
+
+.training-hub-button--ghost {
+	background: transparent;
+	border-color: var(--training-line);
+	color: var(--training-ink);
+}
+
 .training-hub-section {
 	padding: $token-space-8;
 }
@@ -284,6 +328,112 @@
 	background: linear-gradient(180deg, var(--training-game-tint) 0%, #{$token-bg-card} 100%);
 }
 
+.training-hub-game__header {
+	align-items: flex-start;
+	display: flex;
+	gap: $token-space-3;
+	justify-content: space-between;
+	margin-bottom: $token-space-3;
+}
+
+.training-hub-game__eyebrow {
+	color: var(--training-accent);
+	font-size: 0.78rem;
+	font-weight: $token-weight-bold;
+	letter-spacing: 0.08em;
+	margin: 0 0 $token-space-1;
+	text-transform: uppercase;
+}
+
+.training-hub-game__status-badge {
+	background: #{rgba($token-success, 0.14)};
+	border: 1px solid #{rgba($token-success, 0.22)};
+	border-radius: $token-radius-full;
+	color: $token-primary-700;
+	display: inline-flex;
+	font-size: 0.78rem;
+	font-weight: $token-weight-semibold;
+	padding: 0.4rem 0.7rem;
+	white-space: nowrap;
+}
+
+.training-hub-game__objectives {
+	display: grid;
+	gap: 0.65rem;
+	margin: 0 0 $token-space-5;
+	padding-left: 1.1rem;
+}
+
+.training-hub-game__objectives li {
+	color: var(--training-slate);
+}
+
+.training-hub-game__actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: $token-space-3;
+	margin-bottom: $token-space-5;
+}
+
+.training-hub-game__stats {
+	display: grid;
+	gap: $token-space-3;
+	grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+	margin-bottom: $token-space-4;
+}
+
+.training-hub-game__stat {
+	background: #{rgba($token-success, 0.08)};
+	border: 1px solid var(--training-line);
+	border-radius: $token-radius-xl;
+	display: grid;
+	gap: 0.3rem;
+	padding: $token-space-3;
+}
+
+.training-hub-game__stat-label {
+	color: var(--training-slate);
+	font-size: 0.82rem;
+}
+
+.training-hub-game__stat strong {
+	color: var(--training-ink);
+	font-size: $token-text-lg;
+}
+
+.training-hub-game__progress {
+	align-items: center;
+	display: grid;
+	gap: $token-space-2;
+	grid-template-columns: minmax(0, 1fr) auto;
+	margin-bottom: $token-space-3;
+}
+
+.training-hub-game__progress-bar {
+	background: #{rgba($token-secondary-500, 0.12)};
+	border-radius: $token-radius-full;
+	height: 0.7rem;
+	overflow: hidden;
+}
+
+.training-hub-game__progress-fill {
+	background: linear-gradient(90deg, $token-success 0%, $token-primary-500 100%);
+	display: block;
+	height: 100%;
+	transition: width $token-transition-fast;
+	width: 0;
+}
+
+.training-hub-game__progress-label,
+.training-hub-game__mission {
+	color: var(--training-slate);
+	font-size: 0.92rem;
+}
+
+.training-hub-game__mission {
+	margin: 0 0 $token-space-4;
+}
+
 .training-hub-quiz__list {
 	margin: $token-space-4 0 0;
 	padding-left: 1.1rem;
@@ -294,16 +444,139 @@
 }
 
 .training-hub-game__shell {
-	align-items: center;
-	background: var(--training-game-tint);
-	border: 1px dashed var(--training-game-border);
+	background: linear-gradient(180deg, #{rgba($token-success, 0.08)} 0%, #{rgba($token-secondary-500, 0.04)} 100%);
+	border: 1px solid var(--training-game-border);
 	border-radius: 18px;
-	display: grid;
 	margin-top: $token-space-4;
-	min-height: 220px;
-	padding: $token-space-4;
-	place-items: center;
+	overflow: hidden;
+}
+
+.training-hub-game__stage {
+	background: #0f172a;
+	min-height: 420px;
+	position: relative;
+}
+
+.training-hub-game__container {
+	height: 420px;
+	outline: none;
+	position: relative;
+	width: 100%;
+}
+
+.training-hub-game__container canvas {
+	left: 0;
+	position: absolute;
+	top: 0;
+}
+
+.training-hub-game__overlay {
+	align-items: center;
+	background: rgba(15, 23, 42, 0.86);
+	display: flex;
+	inset: 0;
+	justify-content: center;
+	padding: $token-space-5;
+	position: absolute;
 	text-align: center;
+	z-index: 2;
+}
+
+.training-hub-game__overlay[hidden] {
+	display: none;
+}
+
+.training-hub-game__overlay-card {
+	max-width: 34rem;
+}
+
+.training-hub-game__overlay-eyebrow {
+	color: #93c5fd;
+	font-size: 0.8rem;
+	font-weight: $token-weight-bold;
+	letter-spacing: 0.08em;
+	margin: 0 0 $token-space-2;
+	text-transform: uppercase;
+}
+
+.training-hub-game__overlay-card h4 {
+	color: $token-text-inverse;
+	font-size: clamp(1.6rem, 3vw, 2.2rem);
+	margin: 0 0 $token-space-3;
+}
+
+.training-hub-game__overlay-card p {
+	color: rgba(255, 255, 255, 0.8);
+	margin-bottom: $token-space-5;
+}
+
+.training-hub-game__controls-grid {
+	display: grid;
+	gap: $token-space-3;
+	grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+	margin-bottom: $token-space-5;
+}
+
+.training-hub-game__controls-grid div {
+	background: rgba(255, 255, 255, 0.06);
+	border: 1px solid rgba(255, 255, 255, 0.12);
+	border-radius: $token-radius-xl;
+	display: grid;
+	gap: 0.4rem;
+	padding: $token-space-3;
+}
+
+.training-hub-game__controls-grid span {
+	color: rgba(255, 255, 255, 0.78);
+	font-size: 0.85rem;
+}
+
+.training-hub-game__controls-grid kbd {
+	background: rgba(255, 255, 255, 0.1);
+	border: 1px solid rgba(255, 255, 255, 0.14);
+	border-radius: $token-radius-md;
+	color: $token-text-inverse;
+	font-family: $token-font-mono;
+	font-size: 0.82rem;
+	padding: 0.35rem 0.5rem;
+}
+
+.training-hub-game__overlay-actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: $token-space-3;
+	justify-content: center;
+}
+
+.training-hub-game__footer {
+	align-items: center;
+	display: flex;
+	flex-wrap: wrap;
+	gap: $token-space-4;
+	justify-content: space-between;
+	padding: $token-space-4;
+}
+
+.training-hub-game__links {
+	display: flex;
+	flex-wrap: wrap;
+	gap: $token-space-2;
+}
+
+.training-hub-game__links a {
+	background: #{rgba($token-primary-500, 0.08)};
+	border: 1px solid #{rgba($token-primary-500, 0.16)};
+	border-radius: $token-radius-full;
+	color: var(--training-accent);
+	font-size: 0.85rem;
+	font-weight: $token-weight-semibold;
+	padding: 0.55rem 0.85rem;
+	text-decoration: none;
+}
+
+.training-hub-game__links a:hover,
+.training-hub-game__links a:focus-visible {
+	background: #{rgba($token-primary-500, 0.14)};
 }
 
 .training-hub-game__shell strong {
@@ -440,6 +713,31 @@ body.training-hub-modal-open {
 	.training-hub-hero,
 	.training-hub-section {
 		padding: $token-space-6;
+	}
+
+	.training-hub-hero__actions,
+	.training-hub-game__actions,
+	.training-hub-game__overlay-actions {
+		flex-direction: column;
+	}
+
+	.training-hub-button {
+		width: 100%;
+	}
+
+	.training-hub-game__progress {
+		grid-template-columns: 1fr;
+	}
+
+	.training-hub-game__header,
+	.training-hub-game__footer {
+		align-items: stretch;
+		flex-direction: column;
+	}
+
+	.training-hub-game__stage,
+	.training-hub-game__container {
+		height: 360px;
 	}
 
 	.training-hub-modal {
