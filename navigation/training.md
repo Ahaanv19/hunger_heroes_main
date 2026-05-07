@@ -15,13 +15,16 @@ permalink: /training-hub/
 		<p class="training-hub-hero__eyebrow">Training Hub</p>
 		<h1>Volunteer training materials, checklists, and interactive practice in one place.</h1>
 		<p>
-			This page is set up as the base layout for future training resources. The handbook and checklist
-			areas are ready for file embeds, the quiz area is reserved for knowledge checks, and the game area
-			is prepared for the Training Hub project experience.
+			Review the reference materials, then jump into Base Game Part 1 to practice movement, station
+			discovery, and the Hunger Heroes donation flow inside the Training Hub.
 		</p>
+		<div class="training-hub-hero__actions">
+			<a class="training-hub-button training-hub-button--primary" href="#training-base-game-part-1">Launch Base Game Part 1</a>
+			<a class="training-hub-button training-hub-button--secondary" href="#training-resources">Review training resources</a>
+		</div>
 	</section>
 
-	<section class="training-hub-section">
+	<section class="training-hub-section" id="training-resources">
 		<div class="training-hub-section__header">
 			<h2>Training Resources</h2>
 			<p>
@@ -99,10 +102,10 @@ permalink: /training-hub/
 		</div>
 	</section>
 
-	<section class="training-hub-section">
+	<section class="training-hub-section" id="training-base-game-part-1">
 		<div class="training-hub-section__header">
 			<h2>Practice and Assessment</h2>
-			<p>This area separates future quiz content from the interactive training game.</p>
+			<p>Move from passive review into an interactive lesson built on the existing Hunger Heroes game engine.</p>
 		</div>
 
 		<div class="training-hub-lower">
@@ -119,16 +122,91 @@ permalink: /training-hub/
 				</ul>
 			</article>
 
-			<article class="training-hub-game">
-				<h3>Training Game</h3>
-				<p>
-					This section is reserved for the interactive training game sourced from the Training Hub project in
-					<code>_projects/training-hub/training-game</code>.
-				</p>
-				<div class="training-hub-game__shell" id="training-game-root">
+			<article class="training-hub-game" data-training-game-root>
+				<div class="training-hub-game__header">
 					<div>
-						<strong>Game mount point ready</strong>
-						<p class="training-hub-game__status">Connect the training game here when its published page or embed target is available.</p>
+						<p class="training-hub-game__eyebrow">Base Game Part 1</p>
+						<h3>Training Game</h3>
+					</div>
+					<span class="training-hub-game__status-badge" data-training-game-status>Ready to launch</span>
+				</div>
+				<p>
+					Practice the core Hunger Heroes loop in a guided training format. Use the same engine and world as
+					the live donation game to learn how to navigate the space and discover every station.
+				</p>
+				<ul class="training-hub-game__objectives">
+					<li>Learn the movement controls and how to open NPC dialogue.</li>
+					<li>Find all five donation stations used across the Hunger Heroes flow.</li>
+					<li>Use the Training Hub as the launch point before moving into the full donation experience.</li>
+				</ul>
+				<div class="training-hub-game__actions">
+					<button class="training-hub-button training-hub-button--primary" type="button" data-training-game-start>Start lesson</button>
+					<button class="training-hub-button training-hub-button--secondary" type="button" data-training-game-help>Show controls</button>
+					<a class="training-hub-button training-hub-button--ghost" href="{{ '/donate/game' | relative_url }}">Open full game page</a>
+				</div>
+				<div class="training-hub-game__stats">
+					<div class="training-hub-game__stat">
+						<span class="training-hub-game__stat-label">Stations found</span>
+						<strong data-training-game-stat="stations">0/5</strong>
+					</div>
+					<div class="training-hub-game__stat">
+						<span class="training-hub-game__stat-label">Dialogues opened</span>
+						<strong data-training-game-stat="dialogues">0</strong>
+					</div>
+					<div class="training-hub-game__stat">
+						<span class="training-hub-game__stat-label">Time in lesson</span>
+						<strong data-training-game-stat="time">0:00</strong>
+					</div>
+				</div>
+				<div class="training-hub-game__progress" aria-label="Lesson progress">
+					<div class="training-hub-game__progress-bar">
+						<span class="training-hub-game__progress-fill" data-training-game-progress-fill></span>
+					</div>
+					<span class="training-hub-game__progress-label" data-training-game-progress-label>0% complete</span>
+				</div>
+				<p class="training-hub-game__mission" data-training-game-mission>
+					Launch the lesson, then use WASD to move and E to interact with your first station.
+				</p>
+				<div class="training-hub-game__shell">
+					<div class="training-hub-game__stage" id="gameArea">
+						<div class="training-hub-game__container" id="gameContainer" tabindex="0">
+							<div id="promptDropDown" class="promptDropDown"></div>
+							<canvas id="gameCanvas" aria-hidden="true"></canvas>
+						</div>
+						<div class="training-hub-game__overlay" data-training-game-overlay>
+							<div class="training-hub-game__overlay-card">
+								<p class="training-hub-game__overlay-eyebrow">Interactive lesson</p>
+								<h4>Train inside the Hunger Heroes map</h4>
+								<p>
+									Start Base Game Part 1 to walk the food bank, meet each station, and build confidence
+									before using the full donation tools.
+								</p>
+								<div class="training-hub-game__controls-grid" aria-label="Game controls">
+									<div><kbd>W A S D</kbd><span>Move</span></div>
+									<div><kbd>E</kbd><span>Interact</span></div>
+									<div><kbd>Esc</kbd><span>Pause</span></div>
+									<div><kbd>Mouse</kbd><span>Open dialogue</span></div>
+								</div>
+								<div class="training-hub-game__overlay-actions">
+									<button class="training-hub-button training-hub-button--primary" type="button" data-training-game-start>Start Base Game Part 1</button>
+									<button class="training-hub-button training-hub-button--secondary" type="button" data-training-game-dismiss>Continue browsing hub</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="training-hub-game__footer">
+						<div>
+							<strong>Connected experience</strong>
+							<p class="training-hub-game__status">
+								This lesson reuses the existing Hunger Heroes level, sprite generator, and GameEngine v1.1
+								implementation already shipped with the project.
+							</p>
+						</div>
+						<div class="training-hub-game__links">
+							<a href="{{ '/donate/create' | relative_url }}">Create</a>
+							<a href="{{ '/donate/browse' | relative_url }}">Browse</a>
+							<a href="{{ '/donate/scan' | relative_url }}">Scan</a>
+						</div>
 					</div>
 				</div>
 			</article>
@@ -157,4 +235,34 @@ permalink: /training-hub/
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="{{ '/assets/js/training-hub-pdfs.js' | relative_url }}"></script>
+<script type="module">
+	const root = document.querySelector('[data-training-game-root]');
 
+	try {
+		const module = await import('{{ '/assets/js/projects/training-hub/training-game/levels/TrainingHubBaseGame.js' | relative_url }}');
+		const initTrainingHubBaseGame = typeof module.default === 'function'
+			? module.default
+			: module.initTrainingHubBaseGame;
+
+		if (typeof initTrainingHubBaseGame === 'function') {
+			initTrainingHubBaseGame(root, {
+				basePath: '{{ site.baseurl }}',
+			});
+		} else {
+			console.warn('Training Hub: base game module loaded without an initializer.');
+		}
+	} catch (error) {
+		console.error('Training Hub: failed to load Base Game Part 1.', error);
+
+		const mission = root?.querySelector('[data-training-game-mission]');
+		const status = root?.querySelector('[data-training-game-status]');
+
+		if (status) {
+			status.textContent = 'Temporarily unavailable';
+		}
+
+		if (mission) {
+			mission.textContent = 'Base Game Part 1 could not be loaded right now. Please try the full game page instead.';
+		}
+	}
+</script>
