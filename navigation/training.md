@@ -126,21 +126,22 @@ permalink: /training-hub/
 				<div class="training-hub-game__header">
 					<div>
 						<p class="training-hub-game__eyebrow">Base Game Part 1</p>
-						<h3>Training Game</h3>
+						<h3>Training Mission</h3>
 					</div>
 					<span class="training-hub-game__status-badge" data-training-game-status>Ready to launch</span>
 				</div>
 				<p>
-					Practice the core Hunger Heroes loop in a guided training format. Use the same engine and world as
-					the live donation game to learn how to navigate the space and discover every station.
+					Practice the core Hunger Heroes loop in a guided training-only run. The lesson now uses its own
+					onboarding floor while still running on the shared GameEngine v1.1 project setup.
 				</p>
 				<ul class="training-hub-game__objectives">
 					<li>Learn the movement controls and how to open NPC dialogue.</li>
-					<li>Find all five donation stations used across the Hunger Heroes flow.</li>
+					<li>Find all five training checkpoints mapped to the Hunger Heroes flow.</li>
 					<li>Use the Training Hub as the launch point before moving into the full donation experience.</li>
 				</ul>
 				<div class="training-hub-game__actions">
-					<button class="training-hub-button training-hub-button--primary" type="button" data-training-game-start>Start lesson</button>
+					<button class="training-hub-button training-hub-button--primary" type="button" data-training-game-start>Start training run</button>
+					<button class="training-hub-button training-hub-button--secondary" type="button" data-training-game-fullscreen>Go full screen</button>
 					<button class="training-hub-button training-hub-button--secondary" type="button" data-training-game-help>Show controls</button>
 					<a class="training-hub-button training-hub-button--ghost" href="{{ '/donate/game' | relative_url }}">Open full game page</a>
 				</div>
@@ -165,7 +166,7 @@ permalink: /training-hub/
 					<span class="training-hub-game__progress-label" data-training-game-progress-label>0% complete</span>
 				</div>
 				<p class="training-hub-game__mission" data-training-game-mission>
-					Launch the lesson, then use WASD to move and E to interact with your first station.
+					Launch the training run, then use WASD to move and E to interact with your first checkpoint.
 				</p>
 				<div class="training-hub-game__shell">
 					<div class="training-hub-game__stage" id="gameArea">
@@ -176,10 +177,10 @@ permalink: /training-hub/
 						<div class="training-hub-game__overlay" data-training-game-overlay>
 							<div class="training-hub-game__overlay-card">
 								<p class="training-hub-game__overlay-eyebrow">Interactive lesson</p>
-								<h4>Train inside the Hunger Heroes map</h4>
+								<h4>Train on the onboarding floor</h4>
 								<p>
-									Start Base Game Part 1 to walk the food bank, meet each station, and build confidence
-									before using the full donation tools.
+									Start Base Game Part 1 to walk the training floor, clear each checkpoint, and build confidence
+									before using the live donation tools.
 								</p>
 								<div class="training-hub-game__controls-grid" aria-label="Game controls">
 									<div><kbd>W A S D</kbd><span>Move</span></div>
@@ -189,6 +190,7 @@ permalink: /training-hub/
 								</div>
 								<div class="training-hub-game__overlay-actions">
 									<button class="training-hub-button training-hub-button--primary" type="button" data-training-game-start>Start Base Game Part 1</button>
+									<button class="training-hub-button training-hub-button--secondary" type="button" data-training-game-fullscreen>Go full screen</button>
 									<button class="training-hub-button training-hub-button--secondary" type="button" data-training-game-dismiss>Continue browsing hub</button>
 								</div>
 							</div>
@@ -198,8 +200,8 @@ permalink: /training-hub/
 						<div>
 							<strong>Connected experience</strong>
 							<p class="training-hub-game__status">
-								This lesson reuses the existing Hunger Heroes level, sprite generator, and GameEngine v1.1
-								implementation already shipped with the project.
+								This lesson now runs on a Training Hub-specific level while still using the shared sprite
+								generator, GameEngine v1.1, and project asset pipeline already shipped with the site.
 							</p>
 						</div>
 						<div class="training-hub-game__links">

@@ -457,6 +457,21 @@
 	position: relative;
 }
 
+.training-hub-game__stage:fullscreen,
+.training-hub-game__stage:-webkit-full-screen {
+	height: 100vh;
+	min-height: 100vh;
+}
+
+.training-hub-game__stage:fullscreen .training-hub-game__container,
+.training-hub-game__stage:-webkit-full-screen .training-hub-game__container {
+	height: 100%;
+}
+
+.training-hub-game__stage:fullscreen::backdrop {
+	background: #020617;
+}
+
 .training-hub-game__container {
 	height: 420px;
 	outline: none;
