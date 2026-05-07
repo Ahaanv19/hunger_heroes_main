@@ -169,7 +169,7 @@ export function initTrainingHubBaseGame(root, options = {}) {
       GameControl,
     );
 
-    if (options.onStart instanceof Function) {
+    if (gameInstance && options.onStart instanceof Function) {
       options.onStart(gameInstance);
     }
   };

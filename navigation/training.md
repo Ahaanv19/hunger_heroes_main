@@ -240,7 +240,9 @@ permalink: /training-hub/
 
 	try {
 		const module = await import('{{ '/assets/js/projects/training-hub/training-game/levels/TrainingHubBaseGame.js' | relative_url }}');
-		const initTrainingHubBaseGame = module.default || module.initTrainingHubBaseGame;
+		const initTrainingHubBaseGame = typeof module.default === 'function'
+			? module.default
+			: module.initTrainingHubBaseGame;
 
 		if (typeof initTrainingHubBaseGame === 'function') {
 			initTrainingHubBaseGame(root, {
