@@ -143,7 +143,6 @@ permalink: /training-hub/
 					<button class="training-hub-button training-hub-button--primary" type="button" data-training-game-start>Start starter map</button>
 					<button class="training-hub-button training-hub-button--secondary" type="button" data-training-game-fullscreen>Go full screen</button>
 					<button class="training-hub-button training-hub-button--secondary" type="button" data-training-game-help>Show controls</button>
-					<a class="training-hub-button training-hub-button--ghost" href="{{ '/donate/game' | relative_url }}">Open full game page</a>
 				</div>
 				<div class="training-hub-game__stats">
 					<div class="training-hub-game__stat">
@@ -204,11 +203,7 @@ permalink: /training-hub/
 								shared GameEngine v1.1 untouched.
 							</p>
 						</div>
-						<div class="training-hub-game__links">
-							<a href="{{ '/donate/create' | relative_url }}">Create</a>
-							<a href="{{ '/donate/browse' | relative_url }}">Browse</a>
-							<a href="{{ '/donate/scan' | relative_url }}">Scan</a>
-						</div>
+
 					</div>
 				</div>
 			</article>
