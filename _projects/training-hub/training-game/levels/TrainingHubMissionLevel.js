@@ -1,10 +1,10 @@
 import GameEnvBackground from '../../../../GameEnginev1.1/essentials/GameEnvBackground.js';
-// Preserved for when NPC checkpoints are re-added:
-// import Npc from '../../../../GameEnginev1.1/essentials/Npc.js';
-// Player movement will not be re-added. For future keystroke handling, listen for
-// keydown events on the container — see keypress reference in TrainingHubMissionConfig.js.
+import Player from '../../../../GameEnginev1.1/essentials/Player.js';
+import Npc from '../../../../GameEnginev1.1/essentials/Npc.js';
 import SpriteGenerator from '../../../hunger-heroes-game/levels/SpriteGenerator.js';
 import TRAINING_HUB_MISSION_CONFIG from './TrainingHubMissionConfig.js';
+
+const HERO_SCALE = 6;
 
 const resolveProjectAssetPath = (basePath, assetPath) => {
   if (!assetPath) {
@@ -21,14 +21,27 @@ const resolveSpriteSource = (gameEnv, assetPath, fallbackSource) => (
   resolveProjectAssetPath(gameEnv.path, assetPath) || fallbackSource
 );
 
-// Preserved for when player/NPC placement is re-added:
-// const resolvePosition = (width, height, position) => ({
-//   x: width * position.x,
-//   y: height * position.y,
-// });
+const resolvePosition = (width, height, position) => ({
+  x: width * position.x,
+  y: height * position.y,
+});
 
-// Preserved for when NPC checkpoints are re-added:
-// const createCheckpoint = ({ id, label, emoji, color, position, greeting, dialogues, assetPath = null }, gameEnv, width, height) => ({ ... });
+const createCheckpoint = ({ id, label, emoji, color, position, greeting, dialogues, assetPath = null }, gameEnv, width, height) => ({
+  id,
+  greeting,
+  src: resolveSpriteSource(gameEnv, assetPath, SpriteGenerator.createNpcSprite(emoji, color, label)),
+  SCALE_FACTOR: 6,
+  ANIMATION_RATE: 180,
+  pixels: { width: 384, height: 128 },
+  INIT_POSITION: resolvePosition(width, height, position),
+  orientation: { rows: 1, columns: 3 },
+  down: { row: 0, start: 0, columns: 3 },
+  hitbox: { widthPercentage: 0.1, heightPercentage: 0.2 },
+  dialogues,
+  interact: function () {
+    this.showReactionDialogue();
+  },
+});
 
 class TrainingHubMissionLevel {
   static levelId = TRAINING_HUB_MISSION_CONFIG.levelId;
@@ -36,6 +49,8 @@ class TrainingHubMissionLevel {
 
   constructor(gameEnv) {
     const config = TRAINING_HUB_MISSION_CONFIG;
+    const width = gameEnv.innerWidth;
+    const height = gameEnv.innerHeight;
 
     const bgData = {
       name: config.background.name,
@@ -44,13 +59,30 @@ class TrainingHubMissionLevel {
       pixels: config.background.pixels,
     };
 
-    // Only the background is rendered for now.
-    // To restore NPC checkpoints: uncomment Npc import, restore createCheckpoint/resolvePosition,
-    // and spread checkpoint entries into this.classes.
-    // For keystroke handling: add a keydown listener to gameEnv.gameContainer — key codes are
-    // documented in TrainingHubMissionConfig.js.
+    const heroData = {
+      id: config.hero.id,
+      greeting: config.hero.greeting,
+      src: resolveSpriteSource(gameEnv, config.hero.assetPath, SpriteGenerator.createHeroSprite()),
+      SCALE_FACTOR: config.hero.scaleFactor || HERO_SCALE,
+      STEP_FACTOR: config.hero.stepFactor || 800,
+      ANIMATION_RATE: config.hero.animationRate || 50,
+      INIT_POSITION: resolvePosition(width, height, config.hero.startPosition),
+      pixels: config.hero.pixels,
+      orientation: { rows: 4, columns: 4 },
+      down: { row: 0, start: 0, columns: 4 },
+      right: { row: 1, start: 0, columns: 4 },
+      left: { row: 2, start: 0, columns: 4 },
+      up: { row: 3, start: 0, columns: 4 },
+      hitbox: config.hero.hitbox,
+      keypress: config.hero.keypress,
+    };
+
+    const checkpoints = config.checkpoints.map((checkpoint) => createCheckpoint(checkpoint, gameEnv, width, height));
+
     this.classes = [
       { class: GameEnvBackground, data: bgData },
+      { class: Player, data: heroData },
+      ...checkpoints.map((checkpoint) => ({ class: Npc, data: checkpoint })),
     ];
   }
 }
