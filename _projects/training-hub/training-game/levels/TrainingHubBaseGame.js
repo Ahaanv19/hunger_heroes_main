@@ -2,7 +2,6 @@ import { GameCore } from '../../../../GameEnginev1.1/essentials/Game.js';
 import GameControl from '../../../../GameEnginev1.1/essentials/GameControl.js';
 import {
   TRAINING_HUB_LEVEL_ID,
-  computeTrainingHubScore,
   createTrainingHubSession,
   fetchTrainingHubLeaderboard,
   saveTrainingHubSession,
@@ -65,10 +64,8 @@ const getSourceCopy = (source) => {
 };
 
 const getSaveSignature = (session) => [
-  session.checkpoints_visited,
-  session.dialogues_completed,
+  session.score,
   session.time_played_seconds,
-  session.checkpoints.join(','),
 ].join('|');
 
 const buildLeaderboardItem = (entry, index) => {
@@ -126,6 +123,7 @@ export function initTrainingHubBaseGame(root, options = {}) {
   const resumeButton = root.querySelector('[data-training-game-resume]');
   const exitButton = root.querySelector('[data-training-game-exit]');
   const scoreDisplay = root.querySelector('[data-training-game-score]');
+  const arrowButtons = root.querySelectorAll('[data-training-game-arrow]');
 
   if (!container || !canvas || !overlay) {
     console.warn('TrainingHubBaseGame: required training game elements were not found.', {
@@ -142,6 +140,7 @@ export function initTrainingHubBaseGame(root, options = {}) {
   let dialoguePollId = null;
   let timerId = null;
   let dialoguesCompleted = 0;
+  let arrowScore = 0;
   let resizeObserver = null;
   let lastSavedSignature = null;
   const openedDialogueBoxes = new Map();
@@ -272,13 +271,7 @@ export function initTrainingHubBaseGame(root, options = {}) {
     }
 
     if (scoreDisplay) {
-      const elapsed = gameStartTime ? Math.round((Date.now() - gameStartTime) / 1000) : 0;
-      const currentScore = computeTrainingHubScore({
-        checkpointsVisited: visitedCount,
-        dialoguesCompleted,
-        timePlayedSeconds: elapsed,
-      });
-      scoreDisplay.textContent = currentScore;
+      scoreDisplay.textContent = arrowScore;
     }
   };
 
@@ -350,15 +343,18 @@ export function initTrainingHubBaseGame(root, options = {}) {
     }
   };
 
-  const getSessionSnapshot = () => createTrainingHubSession({
-    playerName: options.playerName,
-    levelId: TRAINING_HUB_LEVEL_ID,
-    checkpointsVisited: visitedNpcs.size,
-    checkpointsTotal: NPC_IDS.length,
-    dialoguesCompleted,
-    timePlayedSeconds: gameStartTime ? Math.round((Date.now() - gameStartTime) / 1000) : 0,
-    visitedCheckpoints: Array.from(visitedNpcs),
-  });
+  const getSessionSnapshot = () => {
+    const session = createTrainingHubSession({
+      playerName: options.playerName,
+      levelId: TRAINING_HUB_LEVEL_ID,
+      checkpointsVisited: visitedNpcs.size,
+      checkpointsTotal: NPC_IDS.length,
+      dialoguesCompleted,
+      timePlayedSeconds: gameStartTime ? Math.round((Date.now() - gameStartTime) / 1000) : 0,
+      visitedCheckpoints: Array.from(visitedNpcs),
+    });
+    return { ...session, score: arrowScore };
+  };
 
   const saveRun = async ({ quiet = false } = {}) => {
     if (!gameStarted || !gameStartTime) {
@@ -370,15 +366,6 @@ export function initTrainingHubBaseGame(root, options = {}) {
     }
 
     const session = getSessionSnapshot();
-
-    if (session.checkpoints_visited === 0) {
-      if (!quiet) {
-        setFeedback('Visit at least one checkpoint before saving a training run.');
-      }
-
-      return { saved: false, reason: 'no-progress' };
-    }
-
     const signature = getSaveSignature(session);
 
     if (signature === lastSavedSignature) {
@@ -649,9 +636,16 @@ export function initTrainingHubBaseGame(root, options = {}) {
     if (saveResult.saved) {
       setFeedback(`Run paused after saving ${saveResult.data.score} points via ${getSourceCopy(saveResult.source).toLowerCase()}. Use Start game to resume.`);
     } else {
-      setFeedback('Run paused. Use Start game to resume, or save the run after you reach a checkpoint.');
+      setFeedback('Run paused. Use Start game to resume.');
     }
   };
+
+  arrowButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      arrowScore += 5;
+      updateStats();
+    });
+  });
 
   startButtons.forEach((button) => {
     button.addEventListener('click', startGame);

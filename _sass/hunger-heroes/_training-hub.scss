@@ -464,13 +464,28 @@
 }
 
 .training-hub-game__side-arrow {
+	background: none;
+	border: none;
+	cursor: pointer;
 	height: auto;
-	pointer-events: none;
+	padding: 0;
 	position: absolute;
 	top: 50%;
 	transform: translateY(-50%);
 	width: 96px;
 	z-index: 1;
+
+	img {
+		display: block;
+		height: auto;
+		pointer-events: none;
+		width: 100%;
+	}
+
+	&:focus-visible {
+		outline: 2px solid #fff;
+		outline-offset: 3px;
+	}
 }
 
 .training-hub-game__side-arrow--fail {
