@@ -159,18 +159,22 @@ permalink: /training-hub/
 				</p>
 				<div class="training-hub-game__shell">
 					<div class="training-hub-game__stage" id="gameArea">
-						<img
+						<button
 							class="training-hub-game__side-arrow training-hub-game__side-arrow--fail"
-							src="{{ '/assets/projects/training-hub/training-game/Fail Arrow.png' | relative_url }}"
-							alt="Fail"
-							aria-hidden="true"
-						/>
-						<img
+							type="button"
+							data-training-game-arrow="fail"
+							aria-label="Fail"
+						>
+							<img src="{{ '/assets/projects/training-hub/training-game/Fail Arrow.png' | relative_url }}" alt="" aria-hidden="true" />
+						</button>
+						<button
 							class="training-hub-game__side-arrow training-hub-game__side-arrow--pass"
-							src="{{ '/assets/projects/training-hub/training-game/Pass Arrow.png' | relative_url }}"
-							alt="Pass"
-							aria-hidden="true"
-						/>
+							type="button"
+							data-training-game-arrow="pass"
+							aria-label="Pass"
+						>
+							<img src="{{ '/assets/projects/training-hub/training-game/Pass Arrow.png' | relative_url }}" alt="" aria-hidden="true" />
+						</button>
 						<div class="training-hub-game__container" id="gameContainer" tabindex="0">
 							<button class="training-hub-game__pause-btn" type="button" data-training-game-pause aria-label="Pause game">
 								<img
