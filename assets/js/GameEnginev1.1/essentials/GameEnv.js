@@ -125,12 +125,26 @@ class GameEnv {
     setCanvas() {
         // Use the container reference if provided (from environment), otherwise search by ID
         this.container = this.gameContainer || document.getElementById('gameContainer') || document.body;
-        
-        // Create canvas dynamically with unique ID
-        this.canvasId = `gameCanvas-${GameEnv.canvasCounter++}`;
-        this.canvas = document.createElement('canvas');
-        this.canvas.id = this.canvasId;
-        this.container.appendChild(this.canvas);
+
+        const providedCanvas = this.game?.gameCanvas instanceof HTMLCanvasElement ? this.game.gameCanvas : null;
+
+        if (this.canvas instanceof HTMLCanvasElement) {
+            this.canvasId = this.canvas.id || this.canvasId || `gameCanvas-${GameEnv.canvasCounter++}`;
+            this.canvas.id = this.canvasId;
+        } else if (providedCanvas) {
+            this.canvas = providedCanvas;
+            this.canvasId = this.canvas.id || `gameCanvas-${GameEnv.canvasCounter++}`;
+            this.canvas.id = this.canvasId;
+        } else {
+            this.canvasId = `gameCanvas-${GameEnv.canvasCounter++}`;
+            this.canvas = document.createElement('canvas');
+            this.canvas.id = this.canvasId;
+        }
+
+        if (this.canvas.parentNode !== this.container) {
+            this.container.appendChild(this.canvas);
+        }
+
         this.ctx = this.canvas.getContext('2d', { willReadFrequently: true });
     }
 

@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" fill="none">
+  <rect width="1200" height="600" fill="#E8F3EE"/>
+  <rect x="0" y="0" width="1200" height="96" fill="#183A2A"/>
+  <text x="600" y="58" fill="#F8FAFC" font-family="Arial, sans-serif" font-size="34" font-weight="700" text-anchor="middle">Training Hub Starter Map</text>
+  <text x="600" y="520" fill="#2F5E49" font-family="Arial, sans-serif" font-size="24" text-anchor="middle">Swap this background in the project assets folder when your team is ready.</text>
+  <rect x="90" y="150" width="1020" height="330" rx="30" fill="#F8FAFC" stroke="#97B6A6" stroke-width="4" stroke-dasharray="14 14"/>
+  <path d="M140 400C280 355 420 355 600 392C770 427 930 422 1060 382" stroke="#D0A56E" stroke-width="38" stroke-linecap="round"/>
+  <circle cx="220" cy="300" r="54" fill="#D8EEF6" stroke="#0EA5E9" stroke-width="6"/>
+  <circle cx="390" cy="235" r="54" fill="#F0E7FF" stroke="#7C3AED" stroke-width="6"/>
+  <circle cx="600" cy="330" r="54" fill="#FEF3C7" stroke="#F59E0B" stroke-width="6"/>
+  <circle cx="810" cy="235" r="54" fill="#DCFCE7" stroke="#16A34A" stroke-width="6"/>
+  <circle cx="980" cy="300" r="54" fill="#FEE2E2" stroke="#DC2626" stroke-width="6"/>
+  <text x="220" y="309" fill="#0F172A" font-family="Arial, sans-serif" font-size="24" font-weight="700" text-anchor="middle">START</text>
+  <text x="390" y="244" fill="#0F172A" font-family="Arial, sans-serif" font-size="24" font-weight="700" text-anchor="middle">ART</text>
+  <text x="600" y="339" fill="#0F172A" font-family="Arial, sans-serif" font-size="24" font-weight="700" text-anchor="middle">COPY</text>
+  <text x="810" y="244" fill="#0F172A" font-family="Arial, sans-serif" font-size="24" font-weight="700" text-anchor="middle">FLOW</text>
+  <text x="980" y="309" fill="#0F172A" font-family="Arial, sans-serif" font-size="24" font-weight="700" text-anchor="middle">GO</text>
+  <rect x="454" y="438" width="292" height="42" rx="21" fill="#183A2A" opacity="0.9"/>
+  <text x="600" y="465" fill="#F8FAFC" font-family="Arial, sans-serif" font-size="20" font-weight="700" text-anchor="middle">Project assets stay editable without touching the engine</text>
+</svg>

@@ -47,6 +47,9 @@ jobs:
         run: |
           source venv/bin/activate  # Activate virtual environment
           python scripts/convert_notebooks.py  # Run your Python script
+      - name: Build registered project assets
+        run: |
+          make build-registered-projects
       - name: Build with Jekyll
         run: |
           bundle exec jekyll build  # Build your Jekyll site

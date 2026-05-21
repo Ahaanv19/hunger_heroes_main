@@ -15,13 +15,16 @@ permalink: /training-hub/
 		<p class="training-hub-hero__eyebrow">Training Hub</p>
 		<h1>Volunteer training materials, checklists, and interactive practice in one place.</h1>
 		<p>
-			This page is set up as the base layout for future training resources. The handbook and checklist
-			areas are ready for file embeds, the quiz area is reserved for knowledge checks, and the game area
-			is prepared for the Training Hub project experience.
+			Review the reference materials, then jump into Base Game Part 1 to practice movement, station
+			discovery, and the Hunger Heroes donation flow inside the Training Hub.
 		</p>
+		<div class="training-hub-hero__actions">
+			<a class="training-hub-button training-hub-button--primary" href="#training-base-game-part-1">Launch Base Game Part 1</a>
+			<a class="training-hub-button training-hub-button--secondary" href="#training-resources">Review training resources</a>
+		</div>
 	</section>
 
-	<section class="training-hub-section">
+	<section class="training-hub-section" id="training-resources">
 		<div class="training-hub-section__header">
 			<h2>Training Resources</h2>
 			<p>
@@ -99,10 +102,10 @@ permalink: /training-hub/
 		</div>
 	</section>
 
-	<section class="training-hub-section">
+	<section class="training-hub-section" id="training-base-game-part-1">
 		<div class="training-hub-section__header">
 			<h2>Practice and Assessment</h2>
-			<p>This area separates future quiz content from the interactive training game.</p>
+			<p>Move from passive review into an interactive lesson built on the existing Hunger Heroes game engine.</p>
 		</div>
 
 		<div class="training-hub-lower">
@@ -119,17 +122,130 @@ permalink: /training-hub/
 				</ul>
 			</article>
 
-			<article class="training-hub-game">
-				<h3>Training Game</h3>
-				<p>
-					This section is reserved for the interactive training game sourced from the Training Hub project in
-					<code>_projects/training-hub/training-game</code>.
-				</p>
-				<div class="training-hub-game__shell" id="training-game-root">
+			<article class="training-hub-game" data-training-game-root>
+				<div class="training-hub-game__header">
 					<div>
-						<strong>Game mount point ready</strong>
-						<p class="training-hub-game__status">Connect the training game here when its published page or embed target is available.</p>
+						<p class="training-hub-game__eyebrow">Base Game Part 1</p>
 					</div>
+					<span class="training-hub-game__status-badge" data-training-game-status>Ready to launch</span>
+				</div>
+				<div class="training-hub-game__actions">
+					<button class="training-hub-button training-hub-button--primary" type="button" data-training-game-start>Start game</button>
+					<button class="training-hub-button training-hub-button--secondary" type="button" data-training-game-fullscreen>Go full screen</button>
+					<button class="training-hub-button training-hub-button--secondary" type="button" data-training-game-help>Controls</button>
+				</div>
+				<div class="training-hub-game__stats" aria-label="Training run stats">
+					<div class="training-hub-game__stat">
+						<span class="training-hub-game__stat-label">Checkpoints</span>
+						<strong data-training-game-stat="stations">0/5</strong>
+					</div>
+					<div class="training-hub-game__stat">
+						<span class="training-hub-game__stat-label">Dialogues</span>
+						<strong data-training-game-stat="dialogues">0</strong>
+					</div>
+					<div class="training-hub-game__stat">
+						<span class="training-hub-game__stat-label">Elapsed</span>
+						<strong data-training-game-stat="time">0:00</strong>
+					</div>
+				</div>
+				<div class="training-hub-game__progress" aria-label="Training map progress">
+					<div class="training-hub-game__progress-bar">
+						<span class="training-hub-game__progress-fill" data-training-game-progress-fill></span>
+					</div>
+					<span class="training-hub-game__progress-label" data-training-game-progress-label>0% complete</span>
+				</div>
+				<p class="training-hub-game__mission" data-training-game-mission>
+					Launch the starter map, then use WASD to move and E to interact with your first checkpoint.
+				</p>
+				<div class="training-hub-game__shell">
+					<div class="training-hub-game__stage" id="gameArea">
+						<button
+							class="training-hub-game__side-arrow training-hub-game__side-arrow--fail"
+							type="button"
+							data-training-game-arrow="fail"
+							aria-label="Fail"
+						>
+							<img src="{{ '/assets/projects/training-hub/training-game/Fail Arrow.png' | relative_url }}" alt="" aria-hidden="true" />
+						</button>
+						<button
+							class="training-hub-game__side-arrow training-hub-game__side-arrow--pass"
+							type="button"
+							data-training-game-arrow="pass"
+							aria-label="Pass"
+						>
+							<img src="{{ '/assets/projects/training-hub/training-game/Pass Arrow.png' | relative_url }}" alt="" aria-hidden="true" />
+						</button>
+						<div class="training-hub-game__container" id="gameContainer" tabindex="0">
+							<button class="training-hub-game__pause-btn" type="button" data-training-game-pause aria-label="Pause game">
+								<img
+									src="{{ '/assets/projects/training-hub/training-game/backgrounds/Pause_Button.png' | relative_url }}"
+									alt=""
+									aria-hidden="true"
+									width="48"
+									height="48"
+								/>
+							</button>
+							<div class="training-hub-game__pause-menu" data-training-game-pause-menu hidden>
+								<div class="training-hub-game__pause-menu-inner">
+									<img
+										class="training-hub-game__pause-menu-img"
+										src="{{ '/assets/projects/training-hub/training-game/backgrounds/Pause_Menu.png' | relative_url }}"
+										alt="Pause menu"
+									/>
+									<button class="training-hub-game__pause-menu-btn training-hub-game__pause-menu-btn--resume" type="button" data-training-game-resume aria-label="Resume game"></button>
+									<button class="training-hub-game__pause-menu-btn training-hub-game__pause-menu-btn--exit" type="button" data-training-game-exit aria-label="Save and exit"></button>
+								</div>
+							</div>
+							<div class="training-hub-game__scoreboard" aria-live="polite" aria-label="Score">
+								<span class="training-hub-game__scoreboard-label">Score</span>
+								<span class="training-hub-game__scoreboard-value" data-training-game-score>0</span>
+							</div>
+							<div class="training-hub-game__classifier" data-training-game-classifier aria-live="polite"></div>
+							<canvas id="gameCanvas" aria-hidden="true"></canvas>
+						</div>
+						<div class="training-hub-game__overlay" data-training-game-overlay>
+							<div class="training-hub-game__overlay-card">
+								<p class="training-hub-game__overlay-eyebrow">Starter map</p>
+								<h4>Customize this training shell</h4>
+								<p>
+									This map is intentionally lightweight. Keep the engine, replace the checkpoint copy, and swap
+									project assets when your team is ready.
+								</p>
+								<div class="training-hub-game__controls-grid" aria-label="Game controls">
+									<div><kbd>W A S D</kbd><span>Move</span></div>
+									<div><kbd>E</kbd><span>Interact</span></div>
+									<div><kbd>Esc</kbd><span>Pause</span></div>
+									<div><kbd>Mouse</kbd><span>Open dialogue</span></div>
+								</div>
+								<div class="training-hub-game__overlay-actions">
+									<button class="training-hub-button training-hub-button--primary" type="button" data-training-game-start>Start starter map</button>
+									<button class="training-hub-button training-hub-button--secondary" type="button" data-training-game-fullscreen>Go full screen</button>
+									<button class="training-hub-button training-hub-button--secondary" type="button" data-training-game-dismiss>Close overlay</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="training-hub-game__footer">
+					<div>
+						<strong>Save and compare runs</strong>
+						<p class="training-hub-game__status" data-training-game-feedback>
+							Save a session to sync it to Spring. If the backend is offline, the run stays available in local browser storage.
+						</p>
+					</div>
+					<div class="training-hub-game__footer-actions">
+						<button class="training-hub-button training-hub-button--primary" type="button" data-training-game-save>Save run</button>
+						<button class="training-hub-button training-hub-button--secondary" type="button" data-training-game-refresh>Refresh leaderboard</button>
+					</div>
+				</div>
+				<div class="training-hub-game__leaderboard" aria-live="polite">
+					<div class="training-hub-game__leaderboard-header">
+						<strong>Training leaderboard</strong>
+						<span class="training-hub-game__leaderboard-source" data-training-game-source>Loading...</span>
+					</div>
+					<ol class="training-hub-game__leaderboard-list" data-training-game-leaderboard>
+						<li class="training-hub-game__leaderboard-empty">Loading recent runs...</li>
+					</ol>
 				</div>
 			</article>
 		</div>
@@ -157,4 +273,34 @@ permalink: /training-hub/
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="{{ '/assets/js/training-hub-pdfs.js' | relative_url }}"></script>
+<script type="module">
+	const root = document.querySelector('[data-training-game-root]');
 
+	try {
+		const module = await import('{{ '/assets/js/projects/training-hub/training-game/levels/TrainingHubBaseGame.js' | relative_url }}');
+		const initTrainingHubBaseGame = typeof module.default === 'function'
+			? module.default
+			: module.initTrainingHubBaseGame;
+
+		if (typeof initTrainingHubBaseGame === 'function') {
+			initTrainingHubBaseGame(root, {
+				basePath: '{{ site.baseurl }}',
+			});
+		} else {
+			console.warn('Training Hub: base game module loaded without an initializer.');
+		}
+	} catch (error) {
+		console.error('Training Hub: failed to load Base Game Part 1.', error);
+
+		const mission = root?.querySelector('[data-training-game-mission]');
+		const status = root?.querySelector('[data-training-game-status]');
+
+		if (status) {
+			status.textContent = 'Temporarily unavailable';
+		}
+
+		if (mission) {
+			mission.textContent = 'Base Game Part 1 could not be loaded right now. Please try the full game page instead.';
+		}
+	}
+</script>
