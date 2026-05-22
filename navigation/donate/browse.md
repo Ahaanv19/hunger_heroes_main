@@ -77,7 +77,8 @@ menu: nav/home.html
     springFetch, flaskFetch,
     statusBadge, urgencyBadge, sourceBadge,
     sortByUrgency, normalizeDonationList,
-    errorPlaceholder, emptyPlaceholder, CATEGORY_EMOJIS
+    errorPlaceholder, emptyPlaceholder, CATEGORY_EMOJIS,
+    getLocalDonations
   } from '{{site.baseurl}}/assets/js/api/donationApi.js';
 
   // ============================================
@@ -117,6 +118,53 @@ menu: nav/home.html
   }
 
   // ============================================
+  // RESPONSIBILITY: Parse URL query parameters
+  // Returns: { zip, dietary, allergen, sortBy }
+  // ============================================
+  function getQueryParams() {
+    const params = new URLSearchParams(window.location.search);
+    return {
+      zip: params.get('zip') || '',
+      dietary: params.get('dietary') ? params.get('dietary').split(',').map(d => d.trim()) : [],
+      allergen: params.get('allergen') ? params.get('allergen').split(',').map(a => a.trim()) : [],
+      sortBy: params.get('sortBy') || 'created',
+    };
+  }
+
+  // ============================================
+  // RESPONSIBILITY: Apply client-side filtering by zip and allergens (for search results)
+  // Parameters: raw (array), zip (string), allergenExclude (array)
+  // Returns: array — filtered donations
+  // ============================================
+  function filterBySearchCriteria(donations, zip, allergenExclude) {
+    let result = donations;
+
+    // Zip filter (match first 3 digits)
+    if (zip) {
+      result = result.filter(d => {
+        const donorZip = d.donor_zip || d.zip_code || '';
+        return donorZip.startsWith(zip.substring(0, 3));
+      });
+    }
+
+    // Allergen exclusion
+    if (allergenExclude.length) {
+      result = result.filter(d => {
+        const dAllergens = (d.allergens || []).map(a => a.toLowerCase());
+        return !allergenExclude.some(ex => dAllergens.includes(ex.toLowerCase()));
+      });
+    }
+
+    // Only active/posted donations
+    result = result.filter(d => {
+      const s = (d.status || '').toLowerCase();
+      return s === 'posted' || s === 'active';
+    });
+
+    return result;
+  }
+
+  // ============================================
   // RESPONSIBILITY: Apply client-side filtering to Flask data
   // Parameters: raw (array), status (string)
   // Returns: array — filtered donations
@@ -134,10 +182,23 @@ menu: nav/home.html
   // Returns: array — sorted (mutates in place for perf)
   // ============================================
   function sortDonations(raw, sortBy) {
-    if (sortBy === 'expiry') raw.sort((a, b) => new Date(a.expiry_date) - new Date(b.expiry_date));
+    if (sortBy === 'expiry') raw.sort((a, b) => new Date(a.expiry_date || 0) - new Date(b.expiry_date || 0));
     else if (sortBy === 'quantity') raw.sort((a, b) => (b.quantity || 0) - (a.quantity || 0));
     else raw.sort((a, b) => new Date(b.created_at || 0) - new Date(a.created_at || 0));
     return raw;
+  }
+
+  // ============================================
+  // WORKER: Fetch user's own donations (fallback when backend unavailable)
+  // Returns: array — user's donations
+  // ============================================
+  async function fetchUserDonations() {
+    try {
+      return normalizeDonationList(await flaskFetch(`${pythonURI}/api/donations?mine=true`));
+    } catch (err) {
+      console.log('Could not fetch user donations from Flask', err.message);
+      return [];
+    }
   }
 
   // ============================================
@@ -145,13 +206,25 @@ menu: nav/home.html
   // Coordinates: fetch → filter → sort → render
   // ============================================
   async function loadDonations() {
-    const sortBy = document.getElementById('sort-select').value;
-    const status = document.getElementById('status-filter').value;
+    const queryParams = getQueryParams();
+    const sortBySelect = document.getElementById('sort-select');
+    const statusFilter = document.getElementById('status-filter');
+    
+    // If search params exist, override sort selection to match search
+    if (queryParams.zip) {
+      sortBySelect.value = queryParams.sortBy || 'created';
+    }
+    
+    const sortBy = sortBySelect.value;
+    const status = statusFilter.value;
     const container = document.getElementById('browse-list');
     const countEl = document.getElementById('results-count');
 
     let items = [];
     let source = '';
+    let backendUnavailable = false;
+    let showingUserDonations = false;
+    let hasLocalDonations = false;
 
     // Step 1: Try Spring sorted endpoint first (required route)
     try {
@@ -179,23 +252,81 @@ menu: nav/home.html
         items = sortDonations(raw, sortBy);
         source = 'flask';
       } catch (flaskErr) {
-        countEl.textContent = '';
-        container.innerHTML = errorPlaceholder('Neither Spring nor Flask backend could be reached.');
-        return;
+        console.log('Flask also unavailable, trying user donations…', flaskErr.message);
+        backendUnavailable = true;
+        // Step 3: Fall back to user's own donations when backend is completely unavailable
+        items = await fetchUserDonations();
+        showingUserDonations = true;
+        source = '';
       }
     }
 
-    // Step 3: Sort urgent items first
+    // Step 4: MERGE localStorage donations with backend donations
+    // This ensures donations created locally (but not yet synced to backend) are visible
+    const localDonations = getLocalDonations();
+    if (localDonations && localDonations.length > 0) {
+      // Get list of backend donation IDs to avoid duplicates
+      const backendIds = items.map(d => d.id);
+      
+      // Filter local donations to only add ones not already in backend
+      const newLocalDonations = localDonations.filter(ld => !backendIds.includes(ld.id));
+      
+      if (newLocalDonations.length > 0) {
+        hasLocalDonations = true;
+        // Normalize local donations format to match backend
+        const normalizedLocal = newLocalDonations.map(d => ({
+          ...d,
+          food_name: d.food_name || d.foodName || 'Food Donation',
+          donor_name: d.donor_name || d.donorName || 'You',
+          donor_zip: d.donor_zip || d.donorZip || d.zip_code || d.zipCode || '',
+          expiry_date: d.expiry_date || d.expiryDate || d.expiration_date || d.expirationDate || '',
+          dietary_tags: d.dietary_tags || d.dietaryTags || [],
+          allergens: d.allergens || [],
+          days_until_expiry: d.days_until_expiry ?? d.daysUntilExpiry ?? null,
+          _source: 'localStorage' // Mark as from localStorage
+        }));
+        
+        items = [...items, ...normalizedLocal];
+      }
+    }
+
+    // Apply search filters if zip parameter is present
+    if (queryParams.zip && !showingUserDonations) {
+      items = filterBySearchCriteria(items, queryParams.zip, queryParams.allergen);
+    }
+
+    // Step 5: Sort urgent items first
     items = sortByUrgency(items);
 
-    countEl.innerHTML = `${sourceBadge(source)} <span class="ml-2">${items.length} donation${items.length !== 1 ? 's' : ''} found</span>`;
+    // Build results count message
+    let countHtml = '';
+    if (showingUserDonations) {
+      countHtml = `<span class="inline-block px-3 py-1 rounded-lg text-xs font-semibold bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400">⚠️ Backend unavailable</span> <span class="ml-2">Showing your published donations (${items.length})</span>`;
+    } else if (backendUnavailable) {
+      countHtml = `<span class="inline-block px-3 py-1 rounded-lg text-xs font-semibold bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400">⚠️ Backend unavailable</span> <span class="ml-2">No donations found</span>`;
+    } else {
+      let sourceBadgeHtml = sourceBadge(source);
+      if (hasLocalDonations) {
+        sourceBadgeHtml += ` <span class="inline-block px-3 py-1 rounded-lg text-xs font-semibold bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400 ml-2">💾 Includes your local donations</span>`;
+      }
+      countHtml = `${sourceBadgeHtml} <span class="ml-2">${items.length} donation${items.length !== 1 ? 's' : ''} found</span>`;
+    }
+    countEl.innerHTML = countHtml;
 
     if (items.length === 0) {
-      container.innerHTML = emptyPlaceholder('No Donations Found', 'Try changing the filters.');
+      if (showingUserDonations || backendUnavailable) {
+        container.innerHTML = emptyPlaceholder(
+          backendUnavailable ? 'No Donations Available' : 'You haven\'t published any donations yet',
+          backendUnavailable ? 'The backend is currently unavailable. Please try again later.' : 'Start by publishing a donation to help others in need!',
+          '🤔'
+        );
+      } else {
+        container.innerHTML = emptyPlaceholder('No Donations Found', 'Try changing the filters or check back later for new donations.');
+      }
       return;
     }
 
-    // Step 4: Render cards
+    // Step 6: Render cards
     container.innerHTML = `<div class="grid grid-cols-1 md:grid-cols-2 gap-4">${items.map(renderBrowseCard).join('')}</div>`;
   }
 
