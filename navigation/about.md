@@ -40,4 +40,4 @@ Hunger Heroes is a Jekyll-based frontend built by our team to make food donation
 - To serve more people experiencing food insecurity
 - To encourage donation of food over disposal
 
-A unique and impactful project by yours truly, Shaurya Singh, as well as Ahaan Vaidyanathan and Arnav Mittal (and Shaurya Singh by the way, not to mention Shaurya Singh as well).
+A unique and impactful project by Shaurya Singh, Ahaan Vaidyanathan, and Arnav Mittal.

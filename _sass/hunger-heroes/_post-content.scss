@@ -1,0 +1,209 @@
+// ==============================================
+// POST CONTENT — Article and Page Styling
+// ==============================================
+// Styling for .post articles and .post-content divs
+// Used for About, Blog, Search, and other text pages
+
+@import "design-tokens";
+@import "mixins";
+
+/* Post and Page Container */
+article.post {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem 0;
+  border: none;
+  box-shadow: none;
+  background: transparent;
+}
+
+/* Post Title */
+.post-title {
+  font-size: $token-text-4xl;
+  font-weight: 700;
+  margin-bottom: $token-space-6;
+  line-height: $token-leading-tight;
+  color: $token-primary-700;
+  letter-spacing: $token-tracking-tight;
+}
+
+/* Post Content Wrapper */
+.post-content {
+  font-size: $token-text-lg;
+  line-height: $token-leading-relaxed;
+  color: $token-text-secondary;
+
+  /* Headings */
+  h2 {
+    font-size: $token-text-3xl;
+    font-weight: 600;
+    margin-top: $token-space-8;
+    margin-bottom: $token-space-4;
+    color: $token-primary-700;
+    letter-spacing: $token-tracking-tight;
+  }
+
+  h3 {
+    font-size: $token-text-2xl;
+    font-weight: 600;
+    margin-top: $token-space-6;
+    margin-bottom: $token-space-3;
+    color: $token-primary-600;
+    letter-spacing: $token-tracking-tight;
+  }
+
+  h4 {
+    font-size: $token-text-xl;
+    font-weight: 600;
+    margin-top: $token-space-5;
+    margin-bottom: $token-space-2;
+    color: $token-primary-600;
+    letter-spacing: $token-tracking-tight;
+  }
+
+  /* Paragraphs */
+  p {
+    margin-bottom: $token-space-5;
+    text-align: justify;
+  }
+
+  /* Lists */
+  ul,
+  ol {
+    margin-left: $token-space-8;
+    margin-bottom: $token-space-6;
+  }
+
+  ul li,
+  ol li {
+    margin-bottom: $token-space-3;
+    line-height: $token-leading-relaxed;
+  }
+
+  ul li {
+    list-style-type: disc;
+    list-style-position: outside;
+  }
+
+  ol li {
+    list-style-type: decimal;
+    list-style-position: outside;
+  }
+
+  /* Nested lists */
+  ul ul,
+  ol ol,
+  ul ol,
+  ol ul {
+    margin-top: $token-space-2;
+    margin-bottom: $token-space-2;
+    margin-left: $token-space-6;
+  }
+
+  ul ul li {
+    list-style-type: circle;
+  }
+
+  /* List item emphasis */
+  li strong {
+    font-weight: 600;
+    color: $token-primary-700;
+  }
+
+  /* Blockquotes */
+  blockquote {
+    border-left: 4px solid $token-primary-700;
+    padding: $token-space-5 $token-space-6;
+    margin: $token-space-6 0;
+    background-color: $token-bg-section;
+    font-style: italic;
+    color: $token-text-primary;
+    border-radius: $token-radius-lg;
+  }
+
+  /* Code and Pre */
+  code {
+    background-color: $token-neutral-200;
+    padding: 0.2rem 0.5rem;
+    border-radius: $token-radius-sm;
+    font-family: $token-font-mono;
+    font-size: 0.95rem;
+    color: $token-primary-700;
+  }
+
+  pre {
+    background-color: $token-neutral-900;
+    padding: $token-space-6;
+    border-radius: $token-radius-lg;
+    overflow-x: auto;
+    margin-bottom: $token-space-6;
+    line-height: 1.5;
+
+    code {
+      background-color: transparent;
+      padding: 0;
+      font-size: 0.9rem;
+      color: $token-text-inverse;
+    }
+  }
+
+  /* First heading adjustment */
+  h2:first-of-type {
+    margin-top: 0;
+  }
+
+  /* Spacing after headings */
+  > h2 + p,
+  > h3 + p {
+    margin-top: $token-space-2;
+  }
+}
+
+/* Page Description */
+.page-description {
+  font-size: $token-text-xl;
+  font-weight: 500;
+  color: $token-text-secondary;
+  margin-bottom: $token-space-6;
+  font-style: italic;
+}
+
+/* Dark Mode Adjustments */
+.dark {
+  .post-title {
+    color: $token-primary-400;
+  }
+
+  .post-content {
+    color: $token-neutral-300;
+
+    h2,
+    h3,
+    h4 {
+      color: $token-primary-400;
+    }
+
+    li strong {
+      color: $token-primary-400;
+    }
+
+    blockquote {
+      background-color: $token-neutral-800;
+      border-left-color: $token-primary-400;
+      color: $token-neutral-200;
+    }
+
+    code {
+      background-color: $token-neutral-800;
+      color: $token-primary-300;
+    }
+
+    pre {
+      background-color: $token-neutral-900;
+    }
+  }
+
+  .page-description {
+    color: $token-neutral-400;
+  }
+}

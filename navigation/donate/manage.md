@@ -71,7 +71,7 @@ menu: nav/home.html
     normalizeStatus, statusBadge, urgencyBadge, sourceBadge,
     computeUrgency, sortByUrgency,
     normalizeDonationList, showToast, emptyPlaceholder, errorPlaceholder,
-    ERROR_TYPES, getErrorMessage
+    ERROR_TYPES, getErrorMessage, getLocalDonations
   } from '{{site.baseurl}}/assets/js/api/donationApi.js';
 
   let allDonations = [];
@@ -151,12 +151,19 @@ menu: nav/home.html
 
     // Sort urgent donations first, then render
     const sorted = sortByUrgency(filtered);
+    
+    // Check if there are any localStorage donations in the results
+    const hasLocalDonations = sorted.some(d => d._source === 'localStorage');
+    let badgeHtml = '';
+    if (dataSource) {
+      badgeHtml = `<div class="mb-4 flex items-center gap-2">${sourceBadge(dataSource)}<span class="text-xs text-slate-400">${sorted.length} donation${sorted.length !== 1 ? 's' : ''}</span>`;
+      if (hasLocalDonations && dataSource !== 'localStorage') {
+        badgeHtml += `<span class="inline-block px-3 py-1 rounded-lg text-xs font-semibold bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400">💾 Includes your local donations</span>`;
+      }
+      badgeHtml += '</div>';
+    }
 
-    const badge = dataSource
-      ? `<div class="mb-4 flex items-center gap-2">${sourceBadge(dataSource)}<span class="text-xs text-slate-400">${sorted.length} donation${sorted.length !== 1 ? 's' : ''}</span></div>`
-      : '';
-
-    container.innerHTML = badge + `<div class="space-y-4">${sorted.map(renderDonationCard).join('')}</div>`;
+    container.innerHTML = badgeHtml + `<div class="space-y-4">${sorted.map(renderDonationCard).join('')}</div>`;
   }
 
   // ============================================
@@ -273,9 +280,51 @@ menu: nav/home.html
       );
       allDonations = Array.isArray(data) ? data : normalizeDonationList(data);
       dataSource = source;
+      
+      // MERGE localStorage donations with backend donations
+      const localDonations = getLocalDonations();
+      if (localDonations && localDonations.length > 0) {
+        // Get list of backend donation IDs to avoid duplicates
+        const backendIds = allDonations.map(d => d.id || d.donationId);
+        
+        // Filter local donations to only add ones not already in backend
+        const newLocalDonations = localDonations.filter(ld => !backendIds.includes(ld.id));
+        
+        if (newLocalDonations.length > 0) {
+          // Normalize local donations format to match backend
+          const normalizedLocal = newLocalDonations.map(d => ({
+            ...d,
+            food_name: d.food_name || d.foodName || 'Food Donation',
+            donor_name: d.donor_name || d.donorName || 'You',
+            category: d.category || '—',
+            expiry_date: d.expiry_date || d.expiryDate || d.expiration_date || d.expirationDate || '',
+            zip_code: d.donor_zip || d.donorZip || d.zip_code || d.zipCode || '',
+            _source: 'localStorage' // Mark as from localStorage
+          }));
+          
+          allDonations = [...allDonations, ...normalizedLocal];
+        }
+      }
+      
       render();
     } catch (err) {
-      container.innerHTML = errorPlaceholder(getErrorMessage(err));
+      // If both backends fail, try to show localStorage donations only
+      const localDonations = getLocalDonations();
+      if (localDonations && localDonations.length > 0) {
+        allDonations = localDonations.map(d => ({
+          ...d,
+          food_name: d.food_name || d.foodName || 'Food Donation',
+          donor_name: d.donor_name || d.donorName || 'You',
+          category: d.category || '—',
+          expiry_date: d.expiry_date || d.expiryDate || d.expiration_date || d.expirationDate || '',
+          zip_code: d.donor_zip || d.donorZip || d.zip_code || d.zipCode || '',
+          _source: 'localStorage'
+        }));
+        dataSource = 'localStorage';
+        render();
+      } else {
+        container.innerHTML = errorPlaceholder(getErrorMessage(err));
+      }
     }
   }
 
