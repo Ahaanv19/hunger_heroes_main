@@ -1,50 +1,84 @@
-# Hunger Heroes Frontend
+# TCG Collect — Frontend
 
-Hunger Heroes is a Jekyll-based frontend for a food rescue platform that connects surplus food from restaurants, events, and households to nearby shelters and food banks. The site supports the main donation flows in the project, including creating a donation, matching donors and receivers, scanning labels, browsing donations, and reviewing donation history.
+Jekyll frontend for **TCG Collect**, a Pokémon TCG collection tracker with cross-vendor
+price comparison and a card-show directory.
 
-The frontend talks to two backend services: a primary Java Spring Boot API and a Flask fallback API. The API endpoints are configured in `assets/js/api/config.js`, and the site reuses those settings through the shared donation API helpers in `assets/js/api/donationApi.js`.
+The pitch: TCGplayer is a store, Collectr is a ledger, and neither knows the in-person
+market exists. TCG Collect compares prices across marketplaces, tracks your collection as
+a portfolio with real cost basis, and maps your want list onto the actual card-show
+circuit — so you can check a vendor's asking price against the market while standing at
+their booth.
+
+## Pages
+
+| Route | What it does |
+|---|---|
+| `/` | Landing page |
+| `/cards` | Card browser — search, filter by set/rarity/price, paginated grid |
+| `/card?id=` | Card detail — art, cross-vendor buy options, 90-day price chart |
+| `/sets` | Every set, filterable by series |
+| `/collection` | Portfolio — market value, cost basis, unrealized gain/loss |
+| `/completion` | Set completion %, missing cards, cost to finish |
+| `/wantlist` | Cards you're hunting, with your max bid per card |
+| `/show-mode` | Want list + live prices + budget planner, built for a card show |
+| `/shows` | Card show directory — search by text, state, or radius from your location |
+| `/movers` | Biggest price swings over a chosen window |
+
+## Backend
+
+A **single Flask backend** serves everything — catalog, auth, collection, and shows.
+(The former Spring Boot service has been retired; there is no `javaURI` anymore.)
+
+Configure the endpoint in [`assets/js/api/config.js`](assets/js/api/config.js):
+
+```js
+pythonURI = "http://localhost:8288";   // local
+// production: https://tcgcollect.opencodingsociety.com
+```
+
+All requests go through the helpers in
+[`assets/js/api/tcgApi.js`](assets/js/api/tcgApi.js), which return parsed JSON and throw
+on failure so each page renders a single error state.
 
 ## Setup
 
-1. Install Ruby and Bundler. If you are using the same Ruby version as the repo, Bundler 2.7.2 is a safe choice.compsci
+1. Install Ruby and Bundler.
 
-```bash
-gem install bundler:2.7.2
-bundle install
-```
+   ```bash
+   gem install bundler:2.7.2
+   bundle install
+   ```
 
-2. Install the Python dependencies if you plan to run the helper scripts in `scripts/`.
+2. Start the backend (see the backend repo's README) so the pages have data to load.
 
-```bash
-python3 -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
-```
+3. Start the site:
 
-3. Update `assets/js/api/config.js` with the local backend URLs you want to use.
+   ```bash
+   make
+   # or
+   bundle exec jekyll serve -H 127.0.0.1 -P 4887
+   ```
 
-```js
-javaURI = "http://localhost:8286";
-pythonURI = "http://localhost:8288";
-```
+   Then open <http://127.0.0.1:4887/tcg_collect/>.
 
-4. Start the site locally with Jekyll.
+## Note on `baseurl`
 
-Run the makefile:
+`_config.yml` sets `baseurl: "/tcg_collect"`, which must match the GitHub repository name.
+Rename the repo to `tcg_collect` on GitHub, or change `baseurl` and `github_repo` back to
+whatever the repo is actually called — otherwise GitHub Pages will 404 on every asset.
 
-```bash
-make
-```
+## Design
 
-if that does not work, you can try running:
+Dark "display case" palette: low-chroma slate surfaces so card art carries the color.
+Violet (`primary`) is the interactive brand color; gold (`accent`) is reserved strictly
+for rarity signals — chase cards, secret rares, completion milestones. Using gold
+decoratively drains its meaning.
 
-```bash
-bundle exec jekyll serve -H 127.0.0.1 -P 4887
-```
+Tokens live in [`_sass/tcg-collect/_design-tokens.scss`](_sass/tcg-collect/_design-tokens.scss)
+and are mirrored in the Tailwind config inside [`_layouts/base.html`](_layouts/base.html);
+keep the two in sync.
 
-Then open `http://127.0.0.1:4887/hunger_heroes/` in your browser.
+## Attribution
 
-## Notes
-
-- If Bundler is missing or the version is mismatched, rerun `bundle install` after installing the correct Ruby environment.
-- Production deployments should configure TLS, cookies, and CORS on both backend services.
+Card data and images come from the [Pokémon TCG API](https://pokemontcg.io). Not
+affiliated with Nintendo, Game Freak, or The Pokémon Company.

@@ -1,9 +1,11 @@
-title: Hunger Heroes
-description: "An initiative dedicated to combating food insecurity in the city of San Diego"
+title: TCG Collect
+description: "Track your Pokémon card collection, compare market prices across every marketplace, and find card shows near you"
 owner_name: Ahaan Vaidyanathan
 github_username: Ahaanv19
-github_repo: "hunger_heroes" 
-baseurl: "/hunger_heroes"
+github_repo: "tcg_collect"
+# NOTE: baseurl must match the GitHub repo name. Rename the repo to
+# `tcg_collect` on GitHub, or set both of these back to `hunger_heroes`.
+baseurl: "/tcg_collect"
 future: true
 remote_theme: jekyll/minima
 minima:

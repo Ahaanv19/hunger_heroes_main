@@ -13,17 +13,17 @@ menu: nav/home.html
       <svg class="w-5 h-5 text-yellow-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
         <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
       </svg>
-      <span class="text-yellow-400 font-semibold">Hunger Heroes Premium</span>
+      <span class="text-yellow-400 font-semibold">TCG Collect Premium</span>
     </div>
   </div>
 
   <!-- Header -->
   <div class="text-center mb-12">
     <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">
-      <span class="bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent">Choose</span> Your Plan
+      <span class="bg-gradient-to-r from-violet-400 to-blue-500 bg-clip-text text-transparent">Choose</span> Your Plan
     </h1>
     <p class="text-gray-400 text-lg max-w-2xl mx-auto">
-      Unlock the full potential of smart navigation in San Diego
+      Track a bigger collection, get price-drop alerts, and unlock full portfolio analytics
     </p>
   </div>
 
@@ -32,15 +32,15 @@ menu: nav/home.html
     <span id="monthly-label" class="text-gray-300 font-medium">Monthly</span>
     <label class="relative inline-flex items-center cursor-pointer">
       <input type="checkbox" id="billing-toggle" class="sr-only peer">
-      <div class="w-14 h-7 bg-gray-700 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-green-800 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-green-600"></div>
+      <div class="w-14 h-7 bg-gray-700 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-violet-800 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-violet-600"></div>
     </label>
     <span id="yearly-label" class="text-gray-500 font-medium">Yearly</span>
-    <span class="ml-2 px-2 py-1 bg-green-500/20 text-green-400 text-xs font-semibold rounded-full">Save 20%</span>
+    <span class="ml-2 px-2 py-1 bg-violet-500/20 text-violet-400 text-xs font-semibold rounded-full">Save 20%</span>
   </div>
 
   <!-- Loading State -->
   <div id="loading-state" class="flex justify-center items-center py-20">
-    <div class="animate-spin rounded-full h-12 w-12 border-4 border-green-500 border-t-transparent"></div>
+    <div class="animate-spin rounded-full h-12 w-12 border-4 border-violet-500 border-t-transparent"></div>
   </div>
 
   <!-- Pricing Cards -->
@@ -57,7 +57,7 @@ menu: nav/home.html
       </div>
       
       <h3 class="text-2xl font-bold text-white text-center mb-2">Free</h3>
-      <p class="text-gray-400 text-center text-sm mb-6">Get started with the basics</p>
+      <p class="text-gray-400 text-center text-sm mb-6">Start your binder</p>
       
       <div class="text-center mb-8">
         <span class="text-5xl font-bold text-white">$0</span>
@@ -66,46 +66,46 @@ menu: nav/home.html
       
       <ul class="space-y-4 mb-8">
         <li class="flex items-center text-gray-300">
-          <svg class="w-5 h-5 text-green-400 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg class="w-5 h-5 text-violet-400 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
           </svg>
-          Find Best Route (<span class="text-yellow-400 font-medium">4 per day</span>)
+          Browse full catalog &amp; live prices
         </li>
         <li class="flex items-center text-gray-300">
-          <svg class="w-5 h-5 text-green-400 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg class="w-5 h-5 text-violet-400 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
           </svg>
-          View traffic incidents
+          Track up to <span class="text-yellow-400 font-medium">100 cards</span>
         </li>
         <li class="flex items-center text-gray-300">
-          <svg class="w-5 h-5 text-green-400 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg class="w-5 h-5 text-violet-400 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
           </svg>
-          Browse local businesses
+          Want list up to <span class="text-yellow-400 font-medium">25 cards</span>
         </li>
         <li class="flex items-center text-gray-300">
-          <svg class="w-5 h-5 text-green-400 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg class="w-5 h-5 text-violet-400 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
           </svg>
-          View community events
+          Card show directory &amp; Show Mode
         </li>
         <li class="flex items-center text-gray-500">
           <svg class="w-5 h-5 text-gray-600 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
           </svg>
-          <span class="line-through">Daily Routine Planner</span>
+          <span class="line-through">Portfolio analytics</span>
         </li>
         <li class="flex items-center text-gray-500">
           <svg class="w-5 h-5 text-gray-600 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
           </svg>
-          <span class="line-through">Favorite Locations</span>
+          <span class="line-through">Price-drop alerts</span>
         </li>
         <li class="flex items-center text-gray-500">
           <svg class="w-5 h-5 text-gray-600 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
           </svg>
-          <span class="line-through">Report Traffic Incidents</span>
+          <span class="line-through">CSV import / export</span>
         </li>
       </ul>
       
@@ -115,10 +115,10 @@ menu: nav/home.html
     </div>
 
     <!-- Plus Tier (Most Popular) -->
-    <div class="relative bg-gradient-to-b from-green-900/30 to-gray-800/50 backdrop-blur-sm rounded-3xl p-8 border-2 border-green-500/50 hover:border-green-400 transition-all duration-300 transform scale-105 shadow-2xl shadow-green-500/20">
+    <div class="relative bg-gradient-to-b from-violet-900/30 to-gray-800/50 backdrop-blur-sm rounded-3xl p-8 border-2 border-violet-500/50 hover:border-violet-400 transition-all duration-300 transform scale-105 shadow-2xl shadow-violet-500/20">
       <!-- Most Popular Badge -->
       <div class="absolute -top-4 left-1/2 transform -translate-x-1/2">
-        <span class="px-4 py-1 bg-green-500 text-white text-sm font-bold rounded-full">MOST POPULAR</span>
+        <span class="px-4 py-1 bg-violet-500 text-white text-sm font-bold rounded-full">MOST POPULAR</span>
       </div>
       
       <div class="flex justify-center mb-6 mt-2">
@@ -130,7 +130,7 @@ menu: nav/home.html
       </div>
       
       <h3 class="text-2xl font-bold text-white text-center mb-2">Plus</h3>
-      <p class="text-gray-400 text-center text-sm mb-6">For daily commuters</p>
+      <p class="text-gray-400 text-center text-sm mb-6">For active collectors</p>
       
       <div class="text-center mb-8">
         <span id="plus-price" class="text-5xl font-bold text-white">$4.99</span>
@@ -139,50 +139,50 @@ menu: nav/home.html
       
       <ul class="space-y-4 mb-8">
         <li class="flex items-center text-gray-300">
-          <svg class="w-5 h-5 text-green-400 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg class="w-5 h-5 text-violet-400 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
           </svg>
-          Find Best Route (<span class="text-green-400 font-medium">50 routes/day</span>)
+          Everything in Free
         </li>
         <li class="flex items-center text-gray-300">
-          <svg class="w-5 h-5 text-green-400 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg class="w-5 h-5 text-violet-400 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
           </svg>
-          Daily Routine Planner
+          Track up to <span class="text-violet-400 font-medium">2,000 cards</span>
         </li>
         <li class="flex items-center text-gray-300">
-          <svg class="w-5 h-5 text-green-400 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg class="w-5 h-5 text-violet-400 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
           </svg>
-          Save up to <span class="text-green-400 font-medium">10</span> Favorite Locations
+          <span class="text-violet-400 font-medium">Unlimited</span> want list
         </li>
         <li class="flex items-center text-gray-300">
-          <svg class="w-5 h-5 text-green-400 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg class="w-5 h-5 text-violet-400 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
           </svg>
-          Report Traffic Incidents
+          Full portfolio analytics (gain/loss)
         </li>
         <li class="flex items-center text-gray-300">
-          <svg class="w-5 h-5 text-green-400 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg class="w-5 h-5 text-violet-400 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
           </svg>
-          View traffic updates
+          Price-drop alerts on your want list
         </li>
         <li class="flex items-center text-gray-300">
-          <svg class="w-5 h-5 text-green-400 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg class="w-5 h-5 text-violet-400 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
           </svg>
-          Browse local businesses
+          Set-completion tracking
         </li>
         <li class="flex items-center text-gray-500">
           <svg class="w-5 h-5 text-gray-600 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
           </svg>
-          <span class="line-through">Unlimited routes & locations</span>
+          <span class="line-through">Bulk CSV import / export</span>
         </li>
       </ul>
       
-      <button id="plus-btn" class="w-full py-3 px-6 rounded-xl bg-gradient-to-r from-green-500 to-green-600 text-white font-semibold transition-all duration-300 hover:from-green-600 hover:to-green-700 shadow-lg shadow-green-500/30 hover:shadow-green-500/50">
+      <button id="plus-btn" class="w-full py-3 px-6 rounded-xl bg-gradient-to-r from-violet-500 to-violet-600 text-white font-semibold transition-all duration-300 hover:from-violet-600 hover:to-violet-700 shadow-lg shadow-violet-500/30 hover:shadow-violet-500/50">
         Upgrade to Plus
       </button>
     </div>
@@ -198,7 +198,7 @@ menu: nav/home.html
       </div>
       
       <h3 class="text-2xl font-bold text-white text-center mb-2">Pro</h3>
-      <p class="text-gray-400 text-center text-sm mb-6">For power users</p>
+      <p class="text-gray-400 text-center text-sm mb-6">For serious collectors &amp; sellers</p>
       
       <div class="text-center mb-8">
         <span id="pro-price" class="text-5xl font-bold text-white">$9.99</span>
@@ -213,37 +213,31 @@ menu: nav/home.html
           <span class="text-purple-400 font-medium">Everything in Plus</span>
         </li>
         <li class="flex items-center text-gray-300">
-          <svg class="w-5 h-5 text-green-400 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg class="w-5 h-5 text-violet-400 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
           </svg>
-          <span class="text-green-400 font-medium">Unlimited</span> routes per day
+          <span class="text-violet-400 font-medium">Unlimited</span> collection
         </li>
         <li class="flex items-center text-gray-300">
-          <svg class="w-5 h-5 text-green-400 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg class="w-5 h-5 text-violet-400 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
           </svg>
-          <span class="text-green-400 font-medium">Unlimited</span> Favorite Locations
+          Bulk CSV import / export
         </li>
         <li class="flex items-center text-gray-300">
-          <svg class="w-5 h-5 text-green-400 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg class="w-5 h-5 text-violet-400 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
           </svg>
-          Daily Routine Planner
+          Full cross-vendor price history export
         </li>
         <li class="flex items-center text-gray-300">
-          <svg class="w-5 h-5 text-green-400 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg class="w-5 h-5 text-violet-400 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
           </svg>
-          Report Traffic Incidents
+          Early access to new set data
         </li>
         <li class="flex items-center text-gray-300">
-          <svg class="w-5 h-5 text-green-400 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-          </svg>
-          All community features
-        </li>
-        <li class="flex items-center text-gray-300">
-          <svg class="w-5 h-5 text-green-400 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg class="w-5 h-5 text-violet-400 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
           </svg>
           Priority support
@@ -261,7 +255,7 @@ menu: nav/home.html
     <h3 class="text-xl font-semibold text-white mb-4">Your Current Subscription</h3>
     <div class="flex items-center justify-between">
       <div>
-        <p class="text-gray-300">Plan: <span id="current-plan-name" class="text-green-400 font-semibold">Free</span></p>
+        <p class="text-gray-300">Plan: <span id="current-plan-name" class="text-violet-400 font-semibold">Free</span></p>
         <p class="text-gray-400 text-sm" id="billing-info"></p>
       </div>
       <button id="manage-subscription-btn" class="px-4 py-2 bg-gray-700 hover:bg-gray-600 text-white rounded-lg transition-colors">
@@ -309,7 +303,7 @@ menu: nav/home.html
         <button id="modal-close-btn" class="flex-1 py-2 px-4 bg-gray-700 hover:bg-gray-600 text-white rounded-lg transition-colors">
           Cancel
         </button>
-        <a href="{{site.baseurl}}/login" class="flex-1 py-2 px-4 bg-green-500 hover:bg-green-600 text-white rounded-lg transition-colors text-center">
+        <a href="{{site.baseurl}}/login" class="flex-1 py-2 px-4 bg-violet-500 hover:bg-violet-600 text-white rounded-lg transition-colors text-center">
           Login
         </a>
       </div>
@@ -394,7 +388,7 @@ function updateUIForSubscription() {
   
   // Reset buttons
   freeBtn.textContent = 'Current Plan';
-  freeBtn.classList.remove('bg-green-500', 'hover:bg-green-600');
+  freeBtn.classList.remove('bg-violet-500', 'hover:bg-violet-600');
   freeBtn.classList.add('bg-gray-700', 'hover:bg-gray-600');
   
   plusBtn.textContent = 'Upgrade to Plus';
@@ -424,7 +418,7 @@ function updateUIForSubscription() {
   if (currentSubscription.tier === 'plus') {
     document.getElementById('current-plan-name').textContent = 'Plus';
     plusBtn.textContent = 'Current Plan';
-    plusBtn.classList.remove('from-green-500', 'to-green-600');
+    plusBtn.classList.remove('from-violet-500', 'to-violet-600');
     plusBtn.classList.add('bg-gray-600');
     freeBtn.textContent = 'Downgrade';
     proBtn.textContent = 'Upgrade to Pro';

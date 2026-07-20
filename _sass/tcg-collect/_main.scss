@@ -1,5 +1,5 @@
 // ==============================================
-// HUNGER HEROES — Main SASS Entry Point
+// TCG COLLECT — Main SASS Entry Point
 // ==============================================
 // All styles organized into logical partials
 @import "design-tokens";
@@ -9,9 +9,5 @@
 @import "layout";
 @import "components";
 @import "home";
-@import "donate";
-@import "donate-hub";
-@import "flow-nav";
-@import "training-hub";
 @import "text-pages";
 @import "post-content";

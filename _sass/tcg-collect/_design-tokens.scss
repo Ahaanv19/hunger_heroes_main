@@ -1,26 +1,43 @@
 // ==========================================================
-// DESIGN TOKENS — Hunger Heroes Shared Token System
+// DESIGN TOKENS — TCG Collect Shared Token System
 // ==========================================================
 // Single source of truth for colors, typography, spacing,
 // borders, shadows, and transitions across the entire app.
-// Derived from the Figma wireframes (green-themed palette).
+//
+// "Display case" palette: dark, low-chroma surfaces so that
+// card art carries the color, the way velvet sits under
+// jewelry. Violet is the interactive brand color; gold is
+// reserved for rarity signals only.
+//
+// Keep these in sync with the Tailwind config in
+// _layouts/base.html, which mirrors the same ramps.
 // ==========================================================
 
 // ---------------------------------------------------------
 // 1. COLOR TOKENS
 // ---------------------------------------------------------
 
-// --- Primary (Deep Forest Green) ---
-$token-primary-50:    #f0faf5;
-$token-primary-100:   #dceee7;
-$token-primary-200:   #b8dccf;
-$token-primary-300:   #75b8a3;
-$token-primary-400:   #409678;
-$token-primary-500:   #1B5E20;   // Main brand green (buttons, accents)
-$token-primary-600:   #1a5420;   // Hover / active state
-$token-primary-700:   #155020;
-$token-primary-800:   #0d3817;
-$token-primary-900:   #051f0d;
+// --- Primary (Electric Violet) ---
+$token-primary-50:    #f5f3ff;
+$token-primary-100:   #ede9fe;
+$token-primary-200:   #ddd6fe;
+$token-primary-300:   #c4b5fd;
+$token-primary-400:   #a78bfa;
+$token-primary-500:   #8b5cf6;   // Main brand violet (buttons, links)
+$token-primary-600:   #7c3aed;   // Hover / active state
+$token-primary-700:   #6d28d9;
+$token-primary-800:   #5b21b6;
+$token-primary-900:   #4c1d95;
+
+// --- Accent (Chase Gold) ---
+// Rarity only: secret rares, chase cards, completion milestones.
+// Using this decoratively drains its meaning.
+$token-accent-50:     #fffbeb;
+$token-accent-100:    #fef3c7;
+$token-accent-300:    #fcd34d;
+$token-accent-500:    #f59e0b;
+$token-accent-600:    #d97706;
+$token-accent-700:    #b45309;
 
 // --- Secondary (Slate Gray) ---
 $token-secondary-50:  #f8fafb;

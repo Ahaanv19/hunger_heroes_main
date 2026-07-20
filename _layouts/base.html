@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>{{ page.title | default: "Hunger Heroes" }} | Hunger Heroes</title>
+  <title>{{ page.title | default: "TCG Collect" }} | TCG Collect</title>
 
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -19,18 +19,20 @@
             serif: ['Merriweather', 'ui-serif', 'Georgia'],
           },
           colors: {
-            // Professional color palette
+            // TCG Collect — "display case" palette.
+            // Dark, low-chroma surfaces let card art carry the color; the UI
+            // stays out of the way like velvet under jewelry.
             primary: {
-              50: '#f0faf5',
-              100: '#dceee7',
-              200: '#b8dccf',
-              300: '#75b8a3',
-              400: '#409678',
-              500: '#1B5E20', // Deep Forest Green
-              600: '#1a5420',
-              700: '#155020',
-              800: '#0d3817',
-              900: '#051f0d',
+              50: '#f5f3ff',
+              100: '#ede9fe',
+              200: '#ddd6fe',
+              300: '#c4b5fd',
+              400: '#a78bfa',
+              500: '#8b5cf6', // Electric Violet
+              600: '#7c3aed',
+              700: '#6d28d9',
+              800: '#5b21b6',
+              900: '#4c1d95',
             },
             secondary: {
               50: '#f8fafb',
@@ -44,17 +46,20 @@
               800: '#2e3f49',
               900: '#1a2732',
             },
+            // Gold is reserved for rarity signals — chase cards, secret rares,
+            // set-completion milestones. Never decorative, or it stops meaning
+            // anything.
             accent: {
-              50: '#fafafa',
-              100: '#f5f5f5',
-              200: '#e0e0e0',
-              300: '#d0d0d0',
-              400: '#a8a8a8',
-              500: '#757575',
-              600: '#616161',
-              700: '#424242',
-              800: '#212121', // Charcoal
-              900: '#121212',
+              50: '#fffbeb',
+              100: '#fef3c7',
+              200: '#fde68a',
+              300: '#fcd34d',
+              400: '#fbbf24',
+              500: '#f59e0b', // Chase Gold
+              600: '#d97706',
+              700: '#b45309',
+              800: '#92400e',
+              900: '#78350f',
             },
             success: '#10b981',
             warning: '#f59e0b',
@@ -175,13 +180,15 @@
       <div class="flex items-center justify-between h-16 lg:h-20">
         <!-- Logo Section -->
         <a href="{{site.baseurl}}/" class="flex items-center gap-3 group">
-          <div class="w-10 h-10 lg:w-12 lg:h-12 rounded-lg bg-primary-500 flex items-center justify-center shadow-sm border border-primary-600">
+          <div class="w-10 h-10 lg:w-12 lg:h-12 rounded-lg bg-gradient-to-br from-primary-500 to-primary-700 flex items-center justify-center shadow-lg shadow-primary-600/25 border border-primary-400/30">
+            <!-- Stacked cards mark -->
             <svg class="w-6 h-6 lg:w-7 lg:h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+              <rect x="7" y="3" width="12" height="16" rx="2" stroke-width="2" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 7v12a2 2 0 002 2h9" />
             </svg>
           </div>
           <div class="hidden sm:block">
-            <span class="text-xl lg:text-2xl font-bold text-primary-500">Hunger Heroes</span>
+            <span class="text-xl lg:text-2xl font-bold text-primary-500">TCG Collect</span>
           </div>
         </a>
 
@@ -198,19 +205,15 @@
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
               </svg>
-              Donate
+              Cards
               <svg class="w-4 h-4 transition-transform" :class="open ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
               </svg>
             </button>
             <div x-cloak x-show="open" x-transition class="absolute left-0 mt-3 w-72 rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 shadow-large p-2 z-50">
-              <a href="{{site.baseurl}}/donate/" class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">Donate Home</a>
-              <a href="{{site.baseurl}}/donate/create" class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">Create Donation</a>
-              <a href="{{site.baseurl}}/donate/match" class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">Find Food</a>
-              <a href="{{site.baseurl}}/donate/browse" class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">Browse Donations</a>
-              <a href="{{site.baseurl}}/donate/manage" class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">Manage Donations</a>
-              <a href="{{site.baseurl}}/donate/scan" class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">Scan Label</a>
-              <a href="{{site.baseurl}}/donate/history" class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">My Donations</a>
+              <a href="{{site.baseurl}}/cards" class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">Browse Cards</a>
+              <a href="{{site.baseurl}}/sets" class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">All Sets</a>
+              <a href="{{site.baseurl}}/movers" class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">Price Movers</a>
             </div>
           </div>
 
@@ -219,17 +222,21 @@
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
               </svg>
-              Explore
+              My Collection
               <svg class="w-4 h-4 transition-transform" :class="open ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
               </svg>
             </button>
             <div x-cloak x-show="open" x-transition class="absolute right-0 mt-3 w-72 rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 shadow-large p-2 z-50">
-              <a href="{{site.baseurl}}/sponsors/" class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">Sponsors &amp; Partners</a>
-              <a href="{{site.baseurl}}/donate/leaderboard" class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">Leaderboard</a>
-              <a href="{{site.baseurl}}/donate/network" class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">Donation Network</a>
-              <a href="{{site.baseurl}}/donate/categories" class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">Food Categories</a>
-              <a href="{{site.baseurl}}/donate/game" class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">Hunger Heroes Game</a>
+              <a href="{{site.baseurl}}/collection" class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">Portfolio</a>
+              <a href="{{site.baseurl}}/completion" class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">Set Completion</a>
+              <a href="{{site.baseurl}}/wantlist" class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">Want List</a>
+              <div class="my-1 border-t border-slate-200 dark:border-slate-700"></div>
+              <a href="{{site.baseurl}}/shows" class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">Card Shows</a>
+              <a href="{{site.baseurl}}/show-mode" class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold text-accent-500 hover:bg-accent-50 dark:hover:bg-slate-800 transition-colors">
+                Show Mode
+                <span class="ml-auto text-[10px] uppercase tracking-wider bg-accent-500/15 text-accent-600 dark:text-accent-400 px-2 py-0.5 rounded-full">Live</span>
+              </a>
             </div>
           </div>
 
@@ -271,7 +278,7 @@
           </a>
 
           <script type="module">
-            import { pythonURI, javaURI, fetchOptions, login } from '{{site.baseurl}}/assets/js/api/config.js';
+            import { pythonURI, fetchOptions, login } from '{{site.baseurl}}/assets/js/api/config.js';
             window.onload = async function () {
               // Dark mode logic
               const toggleBtn = document.getElementById('theme-toggle');
@@ -331,7 +338,7 @@
                           upgradeLink.classList.add('text-purple-500', 'hover:text-purple-400');
                         } else if (subscription.tier === 'plus') {
                           upgradeLink.classList.remove('text-yellow-500', 'hover:text-yellow-400');
-                          upgradeLink.classList.add('text-green-500', 'hover:text-green-400');
+                          upgradeLink.classList.add('text-violet-500', 'hover:text-violet-400');
                         }
                       }
                     }
@@ -369,22 +376,18 @@
               </a>
               {% endfor %}
               <div class="pt-2 mt-2 border-t border-slate-200 dark:border-slate-700">
-                <p class="px-4 pb-2 text-xs font-semibold uppercase tracking-wider text-slate-400">Donate</p>
-                <a href="{{site.baseurl}}/donate/" class="flex items-center gap-3 px-4 py-3 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition-all">Donate Home</a>
-                <a href="{{site.baseurl}}/donate/create" class="flex items-center gap-3 px-4 py-3 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition-all">Create Donation</a>
-                <a href="{{site.baseurl}}/donate/match" class="flex items-center gap-3 px-4 py-3 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition-all">Find Food</a>
-                <a href="{{site.baseurl}}/donate/browse" class="flex items-center gap-3 px-4 py-3 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition-all">Browse Donations</a>
-                <a href="{{site.baseurl}}/donate/manage" class="flex items-center gap-3 px-4 py-3 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition-all">Manage Donations</a>
-                <a href="{{site.baseurl}}/donate/scan" class="flex items-center gap-3 px-4 py-3 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition-all">Scan Label</a>
-                <a href="{{site.baseurl}}/donate/history" class="flex items-center gap-3 px-4 py-3 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition-all">My Donations</a>
+                <p class="px-4 pb-2 text-xs font-semibold uppercase tracking-wider text-slate-400">Cards</p>
+                <a href="{{site.baseurl}}/cards" class="flex items-center gap-3 px-4 py-3 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition-all">Browse Cards</a>
+                <a href="{{site.baseurl}}/sets" class="flex items-center gap-3 px-4 py-3 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition-all">All Sets</a>
+                <a href="{{site.baseurl}}/movers" class="flex items-center gap-3 px-4 py-3 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition-all">Price Movers</a>
               </div>
               <div class="pt-2 mt-2 border-t border-slate-200 dark:border-slate-700">
-                <p class="px-4 pb-2 text-xs font-semibold uppercase tracking-wider text-slate-400">Explore</p>
-                <a href="{{site.baseurl}}/sponsors/" class="flex items-center gap-3 px-4 py-3 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition-all">Sponsors &amp; Partners</a>
-                <a href="{{site.baseurl}}/donate/leaderboard" class="flex items-center gap-3 px-4 py-3 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition-all">Leaderboard</a>
-                <a href="{{site.baseurl}}/donate/network" class="flex items-center gap-3 px-4 py-3 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition-all">Donation Network</a>
-                <a href="{{site.baseurl}}/donate/categories" class="flex items-center gap-3 px-4 py-3 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition-all">Food Categories</a>
-                <a href="{{site.baseurl}}/donate/game" class="flex items-center gap-3 px-4 py-3 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition-all">Hunger Heroes Game</a>
+                <p class="px-4 pb-2 text-xs font-semibold uppercase tracking-wider text-slate-400">My Collection</p>
+                <a href="{{site.baseurl}}/collection" class="flex items-center gap-3 px-4 py-3 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition-all">Portfolio</a>
+                <a href="{{site.baseurl}}/completion" class="flex items-center gap-3 px-4 py-3 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition-all">Set Completion</a>
+                <a href="{{site.baseurl}}/wantlist" class="flex items-center gap-3 px-4 py-3 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition-all">Want List</a>
+                <a href="{{site.baseurl}}/shows" class="flex items-center gap-3 px-4 py-3 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition-all">Card Shows</a>
+                <a href="{{site.baseurl}}/show-mode" class="flex items-center gap-3 px-4 py-3 text-sm font-semibold text-accent-500 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition-all">Show Mode</a>
               </div>
               <div class="pt-2 mt-2 border-t border-slate-200 dark:border-slate-700">
                 <a href="{{site.baseurl}}/pricing" class="flex items-center gap-3 px-4 py-3 text-sm font-medium text-yellow-500 hover:text-yellow-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition-all">
@@ -412,14 +415,6 @@
   <main class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-12 lg:py-20">
     {{ content }}
 
-    {%- comment -%}
-      Auto-inject the Donate game-flow navigation panel on every /donate/* sub-page
-      (but NOT on the /donate/ hub itself, which has its own canvas tracker).
-    {%- endcomment -%}
-    {%- assign _url = page.url | default: page.permalink -%}
-    {%- if _url contains '/donate/' and _url != '/donate/' and _url != '/donate/index.html' -%}
-      {% include donate-flow-nav.html %}
-    {%- endif -%}
   </main>
 
   <!-- Footer -->
@@ -430,10 +425,11 @@
         <!-- Quick Links -->
         <div>
           <ul class="space-y-3">
-            <li><a href="{{site.baseurl}}/donate/create" class="text-sm text-slate-600 hover:text-primary-600 dark:text-slate-400 dark:hover:text-primary-400 transition-colors">Donate Food</a></li>
-            <li><a href="{{site.baseurl}}/donate/scan" class="text-sm text-slate-600 hover:text-primary-600 dark:text-slate-400 dark:hover:text-primary-400 transition-colors">Scan Label</a></li>
-            <li><a href="{{site.baseurl}}/donate/history" class="text-sm text-slate-600 hover:text-primary-600 dark:text-slate-400 dark:hover:text-primary-400 transition-colors">My Donations</a></li>
-            <li><a href="{{site.baseurl}}/about" class="text-sm text-slate-600 hover:text-primary-600 dark:text-slate-400 dark:hover:text-primary-400 transition-colors">About Us</a></li>
+            <li><a href="{{site.baseurl}}/cards" class="text-sm text-slate-600 hover:text-primary-600 dark:text-slate-400 dark:hover:text-primary-400 transition-colors">Browse Cards</a></li>
+            <li><a href="{{site.baseurl}}/sets" class="text-sm text-slate-600 hover:text-primary-600 dark:text-slate-400 dark:hover:text-primary-400 transition-colors">All Sets</a></li>
+            <li><a href="{{site.baseurl}}/collection" class="text-sm text-slate-600 hover:text-primary-600 dark:text-slate-400 dark:hover:text-primary-400 transition-colors">My Collection</a></li>
+            <li><a href="{{site.baseurl}}/shows" class="text-sm text-slate-600 hover:text-primary-600 dark:text-slate-400 dark:hover:text-primary-400 transition-colors">Card Shows</a></li>
+            <li><a href="{{site.baseurl}}/about" class="text-sm text-slate-600 hover:text-primary-600 dark:text-slate-400 dark:hover:text-primary-400 transition-colors">About</a></li>
           </ul>
         </div>
 
@@ -449,15 +445,16 @@
         <!-- Brand Section -->
         <div class="space-y-4">
           <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-lg bg-primary-500 flex items-center justify-center shadow-sm border border-primary-600">
+            <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-primary-500 to-primary-700 flex items-center justify-center shadow-lg shadow-primary-600/25 border border-primary-400/30">
               <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+                <rect x="7" y="3" width="12" height="16" rx="2" stroke-width="2" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 7v12a2 2 0 002 2h9" />
               </svg>
             </div>
-            <span class="text-lg font-bold text-primary-600 dark:text-primary-400">Hunger Heroes</span>
+            <span class="text-lg font-bold text-primary-600 dark:text-primary-400">TCG Collect</span>
           </div>
           <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
-            Fighting food insecurity in San Diego, we strive to ensure that everyone has access to nutritious food.
+            Track your Pokémon card collection, compare prices across every marketplace, and never overpay at a card show again.
           </p>
         </div>
 
@@ -466,7 +463,7 @@
       <!-- Bottom Bar -->
       <div class="mt-12 pt-8 border-t border-slate-200 dark:border-slate-700 flex flex-col sm:flex-row justify-between items-center gap-4">
         <p class="text-sm text-slate-600 dark:text-slate-400">
-          © 2026 Hunger Heroes. Fighting food waste, feeding hope in San Diego.
+          © 2026 TCG Collect. Card data and prices via the Pokémon TCG API. Not affiliated with Nintendo, Game Freak, or The Pokémon Company.
         </p>
       </div>
     </div>

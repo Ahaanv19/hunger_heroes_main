@@ -5,59 +5,61 @@ permalink: /login
 search_exclude: true
 ---
 
-<main class="relative min-h-screen flex items-center justify-center px-6 py-24 bg-gradient-to-br from-white to-gray-50 dark:from-gray-900 dark:to-gray-800">
+<main class="relative min-h-screen flex items-center justify-center px-6 py-24 bg-slate-50 dark:bg-slate-950">
 
-  <!-- Background Glow Blob -->
-  <div class="absolute -top-40 -left-40 w-[600px] h-[600px] bg-purple-300 dark:bg-purple-700 opacity-20 rounded-full blur-3xl animate-pulse"></div>
+  <!-- Holo glow, brand accent -->
+  <div class="absolute -top-40 -left-40 w-[600px] h-[600px] bg-violet-500 opacity-10 rounded-full blur-3xl pointer-events-none"></div>
+  <div class="absolute -bottom-40 -right-40 w-[500px] h-[500px] bg-amber-400 opacity-10 rounded-full blur-3xl pointer-events-none"></div>
 
-  <!-- Login & Signup Forms -->
   <div class="relative z-10 w-full max-w-5xl flex flex-col md:flex-row gap-8 justify-center items-stretch">
-    
-    <!-- Login Form -->
-    <div class="flex-1 p-8 bg-white/70 dark:bg-gray-800/70 backdrop-blur-md shadow-2xl border border-gray-200 dark:border-gray-700 rounded-2xl">
-      <h2 class="text-3xl font-bold text-primary mb-6 text-center">User Login</h2>
-      <form id="pythonForm" onsubmit="pythonLogin(); return false;" class="space-y-6">
+
+    <!-- Login -->
+    <div class="flex-1 p-8 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md shadow-2xl border border-slate-200 dark:border-slate-800 rounded-2xl">
+      <h2 class="text-3xl font-bold text-violet-600 dark:text-violet-400 mb-2 text-center">Welcome back</h2>
+      <p class="text-sm text-slate-500 dark:text-slate-400 mb-6 text-center">Sign in to your collection</p>
+      <form id="loginForm" onsubmit="tcgLogin(); return false;" class="space-y-6">
         <div>
-          <label for="uid" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Username</label>
-          <input type="text" id="uid" name="uid" required
-            class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white/80 dark:bg-gray-900/60 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-primary transition" />
+          <label for="uid" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Username</label>
+          <input type="text" id="uid" name="uid" required autocomplete="username"
+            class="w-full px-4 py-2 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-violet-500 transition" />
         </div>
         <div>
-          <label for="password" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Password</label>
-          <input type="password" id="password" name="password" required
-            class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white/80 dark:bg-gray-900/60 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-primary transition" />
+          <label for="password" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Password</label>
+          <input type="password" id="password" name="password" required autocomplete="current-password"
+            class="w-full px-4 py-2 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-violet-500 transition" />
         </div>
-        <p id="message" class="text-sm text-red-500 font-medium"></p>
-        <button type="submit"
-          class="w-full py-2 px-4 bg-primary hover:bg-secondary text-black font-semibold rounded-lg shadow-md transition transform hover:scale-105 duration-300">
-          Login 🚀
+        <p id="message" class="text-sm text-red-500 font-medium min-h-[1.25rem]"></p>
+        <button type="submit" id="loginButton"
+          class="w-full py-2.5 px-4 bg-violet-600 hover:bg-violet-500 disabled:bg-slate-400 disabled:cursor-not-allowed text-white font-semibold rounded-lg shadow-lg shadow-violet-600/20 transition">
+          Sign In
         </button>
       </form>
     </div>
 
-    <!-- Signup Form -->
-    <div class="flex-1 p-8 bg-white/70 dark:bg-gray-800/70 backdrop-blur-md shadow-2xl border border-gray-200 dark:border-gray-700 rounded-2xl">
-      <h2 class="text-3xl font-bold text-primary mb-6 text-center">Sign Up: Create an Account for Free!</h2>
+    <!-- Signup -->
+    <div class="flex-1 p-8 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md shadow-2xl border border-slate-200 dark:border-slate-800 rounded-2xl">
+      <h2 class="text-3xl font-bold text-amber-500 mb-2 text-center">Create an account</h2>
+      <p class="text-sm text-slate-500 dark:text-slate-400 mb-6 text-center">Free — start tracking your cards</p>
       <form id="signupForm" onsubmit="signup(); return false;" class="space-y-6">
         <div>
-          <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Name</label>
-          <input type="text" id="name" name="name" required
-            class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white/80 dark:bg-gray-900/60 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-primary transition" />
+          <label for="name" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Name</label>
+          <input type="text" id="name" name="name" required autocomplete="name"
+            class="w-full px-4 py-2 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-amber-500 transition" />
         </div>
         <div>
-          <label for="signupUid" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Username</label>
-          <input type="text" id="signupUid" name="signupUid" required
-            class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white/80 dark:bg-gray-900/60 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-primary transition" />
+          <label for="signupUid" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Username</label>
+          <input type="text" id="signupUid" name="signupUid" required autocomplete="username"
+            class="w-full px-4 py-2 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-amber-500 transition" />
         </div>
         <div>
-          <label for="signupPassword" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Password</label>
-          <input type="password" id="signupPassword" name="signupPassword" required
-            class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white/80 dark:bg-gray-900/60 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-primary transition" />
+          <label for="signupPassword" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Password</label>
+          <input type="password" id="signupPassword" name="signupPassword" required autocomplete="new-password"
+            class="w-full px-4 py-2 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-amber-500 transition" />
         </div>
-        <p id="signupMessage" class="text-sm text-green-500 font-medium"></p>
-        <button type="submit"
-          class="w-full py-2 px-4 bg-primary hover:bg-secondary text-black font-semibold rounded-lg shadow-md transition transform hover:scale-105 duration-300">
-          Sign Up 📝
+        <p id="signupMessage" class="text-sm font-medium min-h-[1.25rem]"></p>
+        <button type="submit" id="signupButton"
+          class="w-full py-2.5 px-4 bg-amber-500 hover:bg-amber-400 disabled:bg-slate-400 disabled:cursor-not-allowed text-slate-900 font-semibold rounded-lg shadow-lg shadow-amber-500/20 transition">
+          Sign Up
         </button>
       </form>
     </div>
@@ -65,143 +67,76 @@ search_exclude: true
 </main>
 
 <script type="module">
-  import { login, pythonURI, javaURI, fetchOptions } from '{{site.baseurl}}/assets/js/api/config.js';
+  import { login, pythonURI, fetchOptions } from '{{site.baseurl}}/assets/js/api/config.js';
 
-  // ── Login to BOTH Flask and Spring simultaneously ──
-  window.pythonLogin = function() {
+  // Single backend (Flask). Login succeeds or it fails — no dual-write, no
+  // silent auto-signup fallback, no timeout guessing.
+  window.tcgLogin = async function () {
+    const button = document.getElementById("loginButton");
     const uid = document.getElementById("uid").value;
     const password = document.getElementById("password").value;
 
-    document.getElementById("message").textContent = "Logging in…";
+    button.disabled = true;
+    document.getElementById("message").textContent = "Signing in…";
 
-    // Wrap both logins in Promises, redirect after both finish
-    const flaskPromise = new Promise((resolve) => {
-      const options = {
+    try {
+      await login({
         URL: `${pythonURI}/api/authenticate`,
-        callback: () => { console.log('✅ Flask login success'); resolve('flask-ok'); },
+        body: { uid, password },
         message: "message",
         method: "POST",
         cache: "no-cache",
-        body: { uid, password }
-      };
-      login(options);
-      // login() may not call callback on failure, so set a timeout fallback
-      setTimeout(() => resolve('flask-timeout'), 5000);
-    });
+      });
+      window.location.href = '{{site.baseurl}}/collection';
+    } catch (err) {
+      // login() has already written the reason into #message.
+      console.warn('Login failed:', err.message);
+      button.disabled = false;
+    }
+  };
 
-    const springPromise = fetch(`${javaURI}/authenticate`, {
-      ...fetchOptions,
-      method: "POST",
-      body: JSON.stringify({ uid, password })
-    })
-    .then(response => {
-      if (!response.ok) {
-        // If Spring login fails, try auto-creating the account, then retry login
-        console.log('Spring login failed, attempting auto-signup…');
-        return fetch(`${javaURI}/api/person/create`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            uid: uid,
-            sid: "0000000",
-            email: uid + "@gmail.com",
-            dob: "01-01-2000",
-            name: uid,
-            password: password,
-            kasmServerNeeded: false
-          })
-        })
-        .then(() => fetch(`${javaURI}/authenticate`, {
-          ...fetchOptions,
-          method: "POST",
-          body: JSON.stringify({ uid, password })
-        }))
-        .then(retryRes => {
-          if (retryRes.ok) console.log('✅ Spring login success (after auto-signup)');
-          else console.warn('⚠️ Spring login failed even after signup');
-          return retryRes;
-        });
-      }
-      console.log('✅ Spring login success');
-      return response;
-    })
-    .catch(err => {
-      console.warn('⚠️ Spring unavailable:', err.message);
-    });
-
-    Promise.allSettled([flaskPromise, springPromise]).then(() => {
-      window.location.href = '{{site.baseurl}}/profile';
-    });
-  }
-
-  // ── Signup to BOTH backends ──
-  window.signup = function() {
-    const signupButton = document.querySelector("#signupForm button");
-    signupButton.disabled = true;
-    signupButton.style.backgroundColor = '#d3d3d3';
-
+  window.signup = async function () {
+    const button = document.getElementById("signupButton");
+    const messageEl = document.getElementById("signupMessage");
     const name = document.getElementById("name").value;
     const uid = document.getElementById("signupUid").value;
     const password = document.getElementById("signupPassword").value;
 
-    // Flask signup
-    const flaskPromise = fetch(`${pythonURI}/api/user`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name, uid, password })
-    })
-    .then(response => {
-      if (!response.ok) throw new Error(`Flask: ${response.status}`);
-      return response.json();
-    })
-    .then(() => console.log('✅ Flask signup success'))
-    .catch(err => console.warn('⚠️ Flask signup failed:', err.message));
+    button.disabled = true;
+    messageEl.style.color = '';
+    messageEl.textContent = "Creating account…";
 
-    // Spring signup
-    const springPromise = fetch(`${javaURI}/api/person/create`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        uid: uid,
-        sid: "0000000",
-        email: uid + "@gmail.com",
-        dob: "01-01-2000",
-        name: name,
-        password: password,
-        kasmServerNeeded: false
-      })
-    })
-    .then(response => {
-      if (!response.ok) throw new Error(`Spring: ${response.status}`);
-      return response.json();
-    })
-    .then(() => console.log('✅ Spring signup success'))
-    .catch(err => console.warn('⚠️ Spring signup failed:', err.message));
+    try {
+      const response = await fetch(`${pythonURI}/api/user`, {
+        ...fetchOptions,
+        method: "POST",
+        cache: "no-cache",
+        body: JSON.stringify({ name, uid, password }),
+      });
 
-    Promise.allSettled([flaskPromise, springPromise]).then(results => {
-      const anySuccess = results.some(r => r.status === 'fulfilled');
-      if (anySuccess) {
-        document.getElementById("signupMessage").textContent = "Signup successful! You can now login.";
-        document.getElementById("signupMessage").style.color = '#22c55e';
-      } else {
-        document.getElementById("signupMessage").textContent = "Signup failed on both backends. Please try again.";
-        document.getElementById("signupMessage").style.color = '#ef4444';
+      if (!response.ok) {
+        // 409-ish duplicates are the common case; surface it plainly.
+        const detail = await response.json().catch(() => ({}));
+        throw new Error(detail.message || `Signup failed (${response.status})`);
       }
-      signupButton.disabled = false;
-      signupButton.style.backgroundColor = '';
-    });
-  }
 
-  window.onload = function() {
-    const isAuthenticated = document.cookie.includes('auth_token');
-    if (isAuthenticated) {
-      fetch(`${pythonURI}/api/user`, fetchOptions)
-        .then(response => {
-          if (!response.ok) throw new Error(`${response.status}`);
-          return response.json();
-        })
-        .then(() => { window.location.href = '{{site.baseurl}}/profile'; })
-        .catch(() => {});
+      messageEl.style.color = '#22c55e';
+      messageEl.textContent = "Account created. You can sign in now.";
+      document.getElementById("signupForm").reset();
+    } catch (err) {
+      messageEl.style.color = '#ef4444';
+      messageEl.textContent = err.message;
+    } finally {
+      button.disabled = false;
     }
   };
+
+  // Already signed in? Skip the form.
+  window.addEventListener('load', () => {
+    fetch(`${pythonURI}/api/user`, fetchOptions)
+      .then(response => {
+        if (response.ok) window.location.href = '{{site.baseurl}}/collection';
+      })
+      .catch(() => { /* not signed in, stay on the login page */ });
+  });
 </script>
