@@ -33,8 +33,12 @@ Configure the endpoint in [`assets/js/api/config.js`](assets/js/api/config.js):
 
 ```js
 pythonURI = "http://localhost:8288";   // local
-// production: https://tcgcollect.opencodingsociety.com
+// production: https://hungerheros.opencodingsociety.com
 ```
+
+> The production host is still the original `hungerheros.` subdomain — the app was
+> rebranded but the deployed domain was not renamed. Keep this in sync with
+> `config.js`; a `tcgcollect.` subdomain does not exist.
 
 All requests go through the helpers in
 [`assets/js/api/tcgApi.js`](assets/js/api/tcgApi.js), which return parsed JSON and throw
